@@ -1379,3 +1379,11 @@ def merge_configs(base_config: AppConfig, override_config: Dict[str, Any]) -> Ap
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
+    print("=== Loading Configuration ===")
+    config_manager = get_config_manager()
+    config = config_manager.get_config()
+    
+    print(f"Trading Mode: {config.trading.mode}")
+    print(f"Symbol: {config.trading.symbol}")
+    print(f"Timeframe: {config.trading.timeframe}")
+    print(f"Enabled Models: {[m.value for m in config.models.enabled_models]}")
