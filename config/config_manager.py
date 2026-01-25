@@ -496,3 +496,10 @@ class TradingConfig(BaseModel):
         le=240,
         description="Cooldown period after news (minutes)"
     )
+    
+    @field_validator('max_position_size', 'min_position_size')
+    @classmethod
+    def validate_position_sizes(cls, v):
+        if v < 0 or v > 1:
+            raise ValueError("Position size must be between 0 and 1")
+        return v
