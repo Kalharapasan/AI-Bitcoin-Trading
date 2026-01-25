@@ -1322,4 +1322,4 @@ class ConfigManager:
         
         logger.info(f"Configuration imported from {import_path}")
     
-
+_config_manager: Optional[ConfigManager] = None
