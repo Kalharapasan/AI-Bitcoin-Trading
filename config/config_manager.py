@@ -1150,3 +1150,6 @@ class ConfigValidator:
         
         if 'trading' in config_data:
             trading = config_data['trading']
+            if 'max_position_size' in trading and 'min_position_size' in trading:
+                if trading['max_position_size'] < trading['min_position_size']:
+                    errors.append("max_position_size must be greater than min_position_size")
