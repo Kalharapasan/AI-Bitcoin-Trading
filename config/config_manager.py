@@ -946,3 +946,8 @@ class AppConfig:
             raise
     
     def save(self, config_path: Union[str, Path] = None) -> None:
+        if config_path is None:
+            config_path = self.config_path or CONFIG_DIR / "config.yaml"
+        
+        config_path = Path(config_path)
+        config_path.parent.mkdir(exist_ok=True, parents=True)
