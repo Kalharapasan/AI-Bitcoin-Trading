@@ -1336,10 +1336,4 @@ def get_config() -> AppConfig:
     return get_config_manager().get_config()
 
 def update_config(updates: Dict[str, Any]) -> None:
-    """
-    Update configuration
-    
-    Args:
-        updates: Dictionary with configuration updates
-    """
     get_config_manager().update_config(updates)
