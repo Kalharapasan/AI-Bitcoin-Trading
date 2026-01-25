@@ -517,3 +517,30 @@ class TradingConfig(BaseModel):
         extra = 'forbid'
         
 class RiskConfig(BaseModel):
+    max_daily_loss: float = Field(
+        default=0.02,
+        ge=0.0,
+        le=0.1,
+        description="Maximum daily loss (fraction of portfolio)"
+    )
+    
+    max_drawdown: float = Field(
+        default=0.15,
+        ge=0.05,
+        le=0.5,
+        description="Maximum drawdown"
+    )
+    
+    max_position_risk: float = Field(
+        default=0.02,
+        ge=0.001,
+        le=0.1,
+        description="Maximum risk per position"
+    )
+    
+    max_correlation: float = Field(
+        default=0.7,
+        ge=0.0,
+        le=1.0,
+        description="Maximum allowed correlation between positions"
+    )
