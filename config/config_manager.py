@@ -1188,4 +1188,4 @@ class ConfigManager:
         errors = temp_config.validate()
         if errors:
             raise ValueError(f"Configuration validation failed: {errors}")
-        
+        self.config.update_from_dict(updates)
