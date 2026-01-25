@@ -1340,3 +1340,6 @@ def update_config(updates: Dict[str, Any]) -> None:
 
 def reload_config() -> None:
     get_config_manager().reload_config()
+
+def start_config_watcher() -> None:
+    get_config_manager().start_watcher()
