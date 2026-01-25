@@ -1,4 +1,131 @@
-.venv/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Virtual environments
 .env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
+# Environment variables and secrets
+.env
+.env.local
+.env.production
+.env.staging
+*.key
+*.pem
+secrets.json
+config/secrets.yaml
 
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Data files
+data/*.csv
+data/*.json
+data/*.parquet
+data/*.h5
+data/*.pkl
+data/*.pickle
+data/raw/
+data/processed/
+data/backtest_results/
+
+# Model files
+models/*.h5
+models/*.pkl
+models/*.pickle
+models/*.joblib
+models/*.pt
+models/*.pth
+models/*.onnx
+*.model
+
+# Logs
+logs/
+*.log
+*.out
+
+# Trading specific
+trading_logs/
+backtest_results/
+portfolio_snapshots/
+trade_history/
+
+# Cache files
+.cache/
+*.cache
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# API keys and credentials (additional protection)
+api_keys.py
+credentials.py
+config/api_keys.yaml
