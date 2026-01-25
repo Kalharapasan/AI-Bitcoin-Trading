@@ -1004,3 +1004,6 @@ class AppConfig:
                 creds = self.api.exchanges[primary_exchange]
                 if not creds.get('api_key') or not creds.get('api_secret'):
                     errors.append(f"API credentials missing for primary exchange: {primary_exchange}")
+        
+        if self.trading.max_position_size < self.trading.min_position_size:
+            errors.append("max_position_size must be greater than min_position_size")
