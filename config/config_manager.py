@@ -1193,3 +1193,12 @@ class ConfigManager:
         self._notify_callbacks()
         
         logger.info("Configuration updated successfully")
+    
+    def reload_config(self) -> None:
+        try:
+            self.config = AppConfig.load(self.config_path)
+            self._notify_callbacks()
+            logger.info("Configuration reloaded from file")
+        except Exception as e:
+            logger.error(f"Failed to reload configuration: {str(e)}")
+            raise
