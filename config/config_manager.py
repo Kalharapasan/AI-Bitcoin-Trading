@@ -1180,3 +1180,5 @@ class ConfigManager:
     
     def get_config(self) -> AppConfig:
         return self.config
+
+    def update_config(self, updates: Dict[str, Any]) -> None:
