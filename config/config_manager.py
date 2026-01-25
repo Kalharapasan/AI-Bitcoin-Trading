@@ -733,3 +733,22 @@ class MonitoringConfig(BaseModel):
         },
         description="Alert thresholds"
     )
+    
+    dashboard_enabled: bool = Field(
+        default=True,
+        description="Enable dashboard"
+    )
+    
+    dashboard_port: int = Field(
+        default=8050,
+        ge=1024,
+        le=65535,
+        description="Dashboard port"
+    )
+    
+    dashboard_refresh_interval: int = Field(
+        default=5,
+        ge=1,
+        le=60,
+        description="Dashboard refresh interval (seconds)"
+    )
