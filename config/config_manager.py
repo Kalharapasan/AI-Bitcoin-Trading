@@ -873,3 +873,4 @@ class BacktestConfig(BaseModel):
         return v
 
     model_config = ConfigDict(validate_assignment=True, extra='forbid')
+
