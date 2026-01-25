@@ -1325,11 +1325,12 @@ class ConfigManager:
 _config_manager: Optional[ConfigManager] = None
 
 def get_config_manager(config_path: Union[str, Path] = None) -> ConfigManager:
-
-
     global _config_manager
     
     if _config_manager is None:
         _config_manager = ConfigManager(config_path)
     
     return _config_manager
+
+def get_config() -> AppConfig:
+    return get_config_manager().get_config()
