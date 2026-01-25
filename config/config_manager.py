@@ -629,3 +629,29 @@ class DataConfig(BaseModel):
         le=5000,
         description="Maximum allowed data latency (ms)"
     )
+    
+    technical_indicators: List[str] = Field(
+        default_factory=lambda: [
+            "sma_20", "sma_50", "ema_12", "ema_26",
+            "rsi", "macd", "bb_upper", "bb_lower",
+            "atr", "adx", "stoch_k", "stoch_d",
+            "obv", "mfi", "cci", "williams_r"
+        ],
+        description="Technical indicators to calculate"
+    )
+    
+    onchain_metrics: List[str] = Field(
+        default_factory=lambda: [
+            "hash_rate", "active_addresses", "transaction_count",
+            "miner_revenue", "exchange_flows"
+        ],
+        description="On-chain metrics to collect"
+    )
+    
+    sentiment_metrics: List[str] = Field(
+        default_factory=lambda: [
+            "fear_greed_index", "twitter_sentiment",
+            "news_sentiment", "social_volume"
+        ],
+        description="Sentiment metrics to collect"
+    )
