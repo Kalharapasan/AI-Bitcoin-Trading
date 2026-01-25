@@ -591,3 +591,15 @@ class RiskConfig(BaseModel):
         ],
         description="Enabled risk models"
     )
+    
+    @field_validator('circuit_breakers')
+    @classmethod
+    def validate_circuit_breakers(cls, v):
+        for key, value in v.items():
+            if value <= 0:
+                raise ValueError(f"Circuit breaker {key} must be positive")
+        return v
+    
+    class Config:
+        validate_assignment = True
+        extra = 'forbid'
