@@ -405,4 +405,16 @@ class TradingConfig(BaseModel):
         le=10000000.0,
         description="Initial capital"
     )
+    primary_strategy: TradingStrategy = Field(
+        default=TradingStrategy.ML_ENSEMBLE,
+        description="Primary trading strategy"
+    )
+    
+    secondary_strategies: List[TradingStrategy] = Field(
+        default_factory=lambda: [
+            TradingStrategy.TREND_FOLLOWING,
+            TradingStrategy.MEAN_REVERSION
+        ],
+        description="Secondary trading strategies"
+    )
     
