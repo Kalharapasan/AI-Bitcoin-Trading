@@ -1065,3 +1065,10 @@ class AppConfig:
         if hasattr(self, section):
             return getattr(self, section)
         raise AttributeError(f"Configuration has no section: {section}")
+
+    def set_section(self, section: str, value: Any) -> None:
+        if hasattr(self, section):
+            setattr(self, section, value)
+            self.config_hash = self.calculate_hash()
+        else:
+            raise AttributeError(f"Configuration has no section: {section}")
