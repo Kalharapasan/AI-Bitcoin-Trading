@@ -1060,3 +1060,8 @@ class AppConfig:
             last_modified=self.last_modified,
             config_path=self.config_path
         )
+    
+    def get_section(self, section: str) -> Any:
+        if hasattr(self, section):
+            return getattr(self, section)
+        raise AttributeError(f"Configuration has no section: {section}")
