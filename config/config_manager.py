@@ -862,3 +862,12 @@ class BacktestConfig(BaseModel):
         default=str(RESULTS_DIR),
         description="Path to save backtest results"
     )
+    
+    @field_validator('start_date', 'end_date')
+    @classmethod
+    def validate_dates(cls, v):
+        try:
+            datetime.strptime(v, "%Y-%m-%d")
+        except ValueError:
+            raise ValueError(f"Invalid date format: {v}. Use YYYY-MM-DD")
+        return v
