@@ -310,7 +310,6 @@ class ModelArchitecture(BaseModel):
         return v
 
 class ModelConfig(BaseModel):
-    """Model Configuration"""
     enabled_models: List[ModelType] = Field(
         default_factory=lambda: [
             ModelType.LSTM,
@@ -364,16 +363,5 @@ class ModelConfig(BaseModel):
         description="Path to save models"
     )
     
-    @field_validator('ensemble_weights')
-    @classmethod
-    def validate_ensemble_weights(cls, v):
-        """Validate ensemble weights sum to 1"""
-        total = sum(v.values())
-        if abs(total - 1.0) > 0.001:
-            raise ValueError(f"Ensemble weights must sum to 1, got {total}")
-        return v
     
-    class Config:
-        use_enum_values = True
-        validate_assignment = True
-        extra = 'forbid'
+    
