@@ -965,3 +965,8 @@ class AppConfig:
         self.last_modified = datetime.now()
         
         logger.info(f"Configuration saved to {config_path}")
+    
+    def calculate_hash(self) -> str:
+        config_dict = self.to_dict()
+        config_str = json.dumps(config_dict, default=str, sort_keys=True)
+        return hashlib.md5(config_str.encode()).hexdigest()
