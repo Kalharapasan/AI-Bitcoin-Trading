@@ -1371,3 +1371,8 @@ def validate_config_file(config_path: Union[str, Path]) -> Tuple[bool, List[str]
         
     except Exception as e:
         return False, [str(e)]
+
+def merge_configs(base_config: AppConfig, override_config: Dict[str, Any]) -> AppConfig:
+    merged = base_config.clone()
+    merged.update_from_dict(override_config)
+    return merged
