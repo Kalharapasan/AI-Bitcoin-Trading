@@ -905,3 +905,10 @@ class AppConfig:
             config_path = CONFIG_DIR / "config.yaml"
         
         config_path = Path(config_path)
+        if not config_path.exists():
+            # Create default config
+            config = cls()
+            config.config_path = str(config_path)
+            config.save()
+            logger.info(f"Created default configuration at {config_path}")
+            return config
