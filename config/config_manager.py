@@ -957,3 +957,5 @@ class AppConfig:
             'environment': self.environment,
             'last_modified': datetime.now().isoformat()
         })
+        with open(config_path, 'w') as f:
+            yaml.dump(config_dict, f, default_flow_style=False, indent=2, sort_keys=False)
