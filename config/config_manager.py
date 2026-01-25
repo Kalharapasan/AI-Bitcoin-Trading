@@ -557,3 +557,12 @@ class RiskConfig(BaseModel):
         le=0.999,
         description="Conditional Value at Risk confidence level"
     )
+    circuit_breakers: Dict[str, float] = Field(
+        default_factory=lambda: {
+            "price_change_5min": 0.05,
+            "price_change_1hour": 0.10,
+            "volume_spike": 5.0,
+            "volatility_spike": 3.0
+        },
+        description="Circuit breaker thresholds"
+    )
