@@ -1387,3 +1387,9 @@ if __name__ == "__main__":
     print(f"Symbol: {config.trading.symbol}")
     print(f"Timeframe: {config.trading.timeframe}")
     print(f"Enabled Models: {[m.value for m in config.models.enabled_models]}")
+    print("\n=== Validating Configuration ===")
+    is_valid, errors = config_manager.validate_current_config()
+    if is_valid:
+        print("Configuration is valid")
+    else:
+        print(f"Configuration errors: {errors}")
