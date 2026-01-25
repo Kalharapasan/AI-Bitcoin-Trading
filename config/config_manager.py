@@ -991,3 +991,7 @@ class AppConfig:
     
     def to_json(self) -> str:
         return json.dumps(self.to_dict(), indent=2, default=str)
+    
+    def validate(self) -> List[str]:
+        
+        errors = []
