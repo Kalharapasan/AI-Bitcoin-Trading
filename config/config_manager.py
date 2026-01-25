@@ -700,3 +700,21 @@ class DataConfig(BaseModel):
     class Config:
         validate_assignment = True
         extra = 'forbid'
+
+class MonitoringConfig(BaseModel):
+    metrics_enabled: bool = Field(
+        default=True,
+        description="Enable metrics collection"
+    )
+    
+    metrics_port: int = Field(
+        default=9090,
+        ge=1024,
+        le=65535,
+        description="Metrics server port"
+    )
+    
+    push_to_prometheus: bool = Field(
+        default=False,
+        description="Push metrics to Prometheus"
+    )
