@@ -906,7 +906,6 @@ class AppConfig:
         
         config_path = Path(config_path)
         if not config_path.exists():
-            # Create default config
             config = cls()
             config.config_path = str(config_path)
             config.save()
