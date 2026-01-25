@@ -1147,3 +1147,6 @@ class ConfigValidator:
             jsonschema.validate(config_data, ConfigValidator.SCHEMA)
         except jsonschema.ValidationError as e:
             errors.append(str(e))
+        
+        if 'trading' in config_data:
+            trading = config_data['trading']
