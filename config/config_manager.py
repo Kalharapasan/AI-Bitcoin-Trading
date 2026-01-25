@@ -843,3 +843,9 @@ class BacktestConfig(BaseModel):
         le=90,
         description="Testing window (days)"
     )
+    monte_carlo_simulations: int = Field(
+        default=1000,
+        ge=100,
+        le=10000,
+        description="Number of Monte Carlo simulations"
+    )
