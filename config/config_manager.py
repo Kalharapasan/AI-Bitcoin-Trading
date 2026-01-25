@@ -1251,3 +1251,23 @@ class ConfigManager:
         except Exception as e:
             logger.error(f"Failed to start configuration watcher: {str(e)}")
             self.observer = None
+    
+    def _watch_config(self):
+        last_mtime = self.config_path.stat().st_mtime
+        
+        while self.running:
+            try:
+                time.sleep(2) 
+                
+                if not self.config_path.exists():
+                    continue
+                
+                current_mtime = self.config_path.stat().st_mtime
+                if current_mtime > last_mtime:
+                    logger.info("Configuration file changed, reloading...")
+                    self.reload_config()
+                    last_mtime = current_mtime
+                    
+            except Exception as e:
+                logger.error(f"Error in config watcher thread: {str(e)}")
+                time.sleep(5) 
