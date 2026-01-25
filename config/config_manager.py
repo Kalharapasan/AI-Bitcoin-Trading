@@ -959,3 +959,9 @@ class AppConfig:
         })
         with open(config_path, 'w') as f:
             yaml.dump(config_dict, f, default_flow_style=False, indent=2, sort_keys=False)
+        
+        self.config_path = str(config_path)
+        self.config_hash = self.calculate_hash()
+        self.last_modified = datetime.now()
+        
+        logger.info(f"Configuration saved to {config_path}")
