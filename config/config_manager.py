@@ -794,3 +794,34 @@ class MonitoringConfig(BaseModel):
     class Config:
         validate_assignment = True
         extra = 'forbid'
+
+class BacktestConfig(BaseModel):
+    start_date: str = Field(
+        default="2023-01-01",
+        description="Backtest start date (YYYY-MM-DD)"
+    )
+    
+    end_date: str = Field(
+        default="2024-01-01",
+        description="Backtest end date (YYYY-MM-DD)"
+    )
+    
+    initial_capital: float = Field(
+        default=10000.0,
+        ge=100.0,
+        description="Initial capital for backtest"
+    )
+    
+    commission: float = Field(
+        default=0.001,
+        ge=0.0,
+        le=0.01,
+        description="Trading commission"
+    )
+    
+    slippage: float = Field(
+        default=0.001,
+        ge=0.0,
+        le=0.01,
+        description="Slippage percentage"
+    )
