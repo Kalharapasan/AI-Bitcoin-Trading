@@ -1177,3 +1177,6 @@ class ConfigManager:
         self.running = False
         
         logger.info(f"Configuration manager initialized with config: {self.config_path}")
+    
+    def get_config(self) -> AppConfig:
+        return self.config
