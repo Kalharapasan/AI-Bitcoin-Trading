@@ -1306,3 +1306,18 @@ class ConfigManager:
         export_path = Path(export_path)
         self.config.save(export_path)
         logger.info(f"Configuration exported to {export_path}")
+    
+    def import_config(self, import_path: Union[str, Path]) -> None:
+        import_path = Path(import_path)
+        
+        if not import_path.exists():
+            raise FileNotFoundError(f"Configuration file not found: {import_path}")
+        imported_config = AppConfig.load(import_path)
+        errors = imported_config.validate()
+        if errors:
+            raise ValueError(f"Imported configuration validation failed: {errors}")
+        self.config = imported_config
+        self.config.save(self.config_path)
+        self._notify_callbacks()
+        
+        logger.info(f"Configuration imported from {import_path}")
