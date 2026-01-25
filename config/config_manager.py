@@ -581,3 +581,13 @@ class RiskConfig(BaseModel):
         default="1d",
         description="Stress test frequency"
     )
+    
+    risk_models: List[str] = Field(
+        default_factory=lambda: [
+            "value_at_risk",
+            "expected_shortfall",
+            "monte_carlo",
+            "stress_testing"
+        ],
+        description="Enabled risk models"
+    )
