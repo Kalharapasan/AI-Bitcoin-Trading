@@ -944,4 +944,5 @@ class AppConfig:
         except Exception as e:
             logger.error(f"Failed to load configuration from {config_path}: {str(e)}")
             raise
-        
+    
+    def save(self, config_path: Union[str, Path] = None) -> None:
