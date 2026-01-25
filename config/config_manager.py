@@ -1189,3 +1189,4 @@ class ConfigManager:
         if errors:
             raise ValueError(f"Configuration validation failed: {errors}")
         self.config.update_from_dict(updates)
+        self.config.save(self.config_path)
