@@ -442,4 +442,41 @@ class TradingConfig(BaseModel):
         le=20,
         description="Maximum open positions"
     )
+    order_type: OrderType = Field(
+        default=OrderType.LIMIT,
+        description="Default order type"
+    )
+    
+    slippage_tolerance: float = Field(
+        default=0.001,
+        ge=0.0,
+        le=0.01,
+        description="Slippage tolerance"
+    )
+    
+    take_profit: float = Field(
+        default=0.05,
+        ge=0.01,
+        le=0.5,
+        description="Take profit percentage"
+    )
+    
+    stop_loss: float = Field(
+        default=0.02,
+        ge=0.005,
+        le=0.1,
+        description="Stop loss percentage"
+    )
+    
+    trailing_stop: bool = Field(
+        default=True,
+        description="Enable trailing stop"
+    )
+    
+    trailing_distance: float = Field(
+        default=0.01,
+        ge=0.001,
+        le=0.05,
+        description="Trailing stop distance"
+    )
     
