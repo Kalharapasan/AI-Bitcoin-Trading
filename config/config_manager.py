@@ -922,3 +922,17 @@ class AppConfig:
             if errors:
                 logger.error(f"Configuration validation errors: {errors}")
                 raise ValueError(f"Configuration validation failed: {errors}")
+            
+            config = cls(
+                api=APIConfig(**config_data.get('api', {})),
+                trading=TradingConfig(**config_data.get('trading', {})),
+                models=ModelConfig(**config_data.get('models', {})),
+                risk=RiskConfig(**config_data.get('risk', {})),
+                data=DataConfig(**config_data.get('data', {})),
+                monitoring=MonitoringConfig(**config_data.get('monitoring', {})),
+                backtest=BacktestConfig(**config_data.get('backtest', {})),
+                version=config_data.get('version', '1.0.0'),
+                environment=config_data.get('environment', 'development'),
+                config_path=str(config_path)
+            )
+        
