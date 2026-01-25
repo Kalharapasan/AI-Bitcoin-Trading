@@ -544,3 +544,16 @@ class RiskConfig(BaseModel):
         le=1.0,
         description="Maximum allowed correlation between positions"
     )
+    var_confidence: float = Field(
+        default=0.95,
+        ge=0.9,
+        le=0.99,
+        description="Value at Risk confidence level"
+    )
+    
+    cvar_confidence: float = Field(
+        default=0.99,
+        ge=0.95,
+        le=0.999,
+        description="Conditional Value at Risk confidence level"
+    )
