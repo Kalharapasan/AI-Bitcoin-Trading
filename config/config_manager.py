@@ -229,3 +229,17 @@ class ModelArchitecture(BaseModel):
         default=[2, 2, 1],
         description="CNN pool sizes"
     )
+    
+    attention_heads: int = Field(
+        default=8,
+        ge=1,
+        le=16,
+        description="Number of attention heads"
+    )
+    
+    attention_dim: int = Field(
+        default=64,
+        ge=32,
+        le=256,
+        description="Attention dimension"
+    )
