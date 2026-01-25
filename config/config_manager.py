@@ -603,3 +603,29 @@ class RiskConfig(BaseModel):
     class Config:
         validate_assignment = True
         extra = 'forbid'
+    
+
+class DataConfig(BaseModel):
+    primary_exchange: str = Field(
+        default="binance",
+        description="Primary exchange for data"
+    )
+    
+    backup_exchanges: List[str] = Field(
+        default_factory=lambda: ["coinbase", "kraken", "bitstamp"],
+        description="Backup exchanges"
+    )
+    
+    data_quality_threshold: float = Field(
+        default=0.95,
+        ge=0.8,
+        le=1.0,
+        description="Minimum data quality score"
+    )
+    
+    max_data_latency_ms: int = Field(
+        default=1000,
+        ge=100,
+        le=5000,
+        description="Maximum allowed data latency (ms)"
+    )
