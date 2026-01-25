@@ -243,3 +243,37 @@ class ModelArchitecture(BaseModel):
         le=256,
         description="Attention dimension"
     )
+    batch_size: int = Field(
+        default=32,
+        ge=8,
+        le=256,
+        description="Training batch size"
+    )
+    
+    epochs: int = Field(
+        default=100,
+        ge=10,
+        le=1000,
+        description="Training epochs"
+    )
+    
+    learning_rate: float = Field(
+        default=0.001,
+        ge=1e-5,
+        le=0.1,
+        description="Learning rate"
+    )
+    
+    weight_decay: float = Field(
+        default=0.0001,
+        ge=0.0,
+        le=0.01,
+        description="Weight decay"
+    )
+    
+    patience: int = Field(
+        default=20,
+        ge=5,
+        le=100,
+        description="Early stopping patience"
+    )
