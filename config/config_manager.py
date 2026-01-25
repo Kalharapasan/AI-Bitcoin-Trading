@@ -566,3 +566,18 @@ class RiskConfig(BaseModel):
         },
         description="Circuit breaker thresholds"
     )
+    
+    stress_test_scenarios: List[str] = Field(
+        default_factory=lambda: [
+            "flash_crash",
+            "liquidity_crisis",
+            "volatility_spike",
+            "exchange_outage"
+        ],
+        description="Stress test scenarios"
+    )
+    
+    stress_test_frequency: str = Field(
+        default="1d",
+        description="Stress test frequency"
+    )
