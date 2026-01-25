@@ -689,3 +689,14 @@ class DataConfig(BaseModel):
         le=86400,
         description="Cache time-to-live (seconds)"
     )
+    
+    @field_validator('backup_exchanges')
+    @classmethod
+    def validate_backup_exchanges(cls, v):
+        if len(v) == 0:
+            raise ValueError("At least one backup exchange is required")
+        return v
+    
+    class Config:
+        validate_assignment = True
+        extra = 'forbid'
