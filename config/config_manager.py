@@ -1393,3 +1393,15 @@ if __name__ == "__main__":
         print("Configuration is valid")
     else:
         print(f"Configuration errors: {errors}")
+    
+    print("\n=== Updating Configuration ===")
+    try:
+        config_manager.update_config({
+            'trading': {
+                'take_profit': 0.06,
+                'stop_loss': 0.03
+            }
+        })
+        print("Configuration updated successfully")
+    except ValueError as e:
+        print(f"Update failed: {str(e)}")
