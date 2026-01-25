@@ -782,3 +782,15 @@ class MonitoringConfig(BaseModel):
         ],
         description="Performance metrics to track"
     )
+    
+    @field_validator('alert_thresholds')
+    @classmethod
+    def validate_alert_thresholds(cls, v):
+        for key, value in v.items():
+            if value < 0:
+                raise ValueError(f"Alert threshold {key} must be non-negative")
+        return v
+    
+    class Config:
+        validate_assignment = True
+        extra = 'forbid'
