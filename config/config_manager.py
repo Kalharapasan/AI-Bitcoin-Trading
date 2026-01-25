@@ -849,3 +849,16 @@ class BacktestConfig(BaseModel):
         le=10000,
         description="Number of Monte Carlo simulations"
     )
+    metrics: List[str] = Field(
+        default_factory=lambda: [
+            "sharpe_ratio", "sortino_ratio", "max_drawdown",
+            "win_rate", "profit_factor", "calmar_ratio",
+            "omega_ratio", "value_at_risk"
+        ],
+        description="Backtest metrics to calculate"
+    )
+    
+    results_save_path: str = Field(
+        default=str(RESULTS_DIR),
+        description="Path to save backtest results"
+    )
