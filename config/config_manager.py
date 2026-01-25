@@ -952,3 +952,8 @@ class AppConfig:
         config_path = Path(config_path)
         config_path.parent.mkdir(exist_ok=True, parents=True)
         config_dict = self.to_dict()
+        config_dict.update({
+            'version': self.version,
+            'environment': self.environment,
+            'last_modified': datetime.now().isoformat()
+        })
