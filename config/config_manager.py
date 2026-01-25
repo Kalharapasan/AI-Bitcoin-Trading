@@ -1343,3 +1343,12 @@ def reload_config() -> None:
 
 def start_config_watcher() -> None:
     get_config_manager().start_watcher()
+
+def stop_config_watcher() -> None:
+    get_config_manager().stop_watcher()
+
+def register_config_callback(callback: callable) -> None:
+    get_config_manager().register_callback(callback)
+
+def unregister_config_callback(callback: callable) -> None:
+    get_config_manager().unregister_callback(callback)
