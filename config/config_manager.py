@@ -1007,3 +1007,6 @@ class AppConfig:
         
         if self.trading.max_position_size < self.trading.min_position_size:
             errors.append("max_position_size must be greater than min_position_size")
+        
+        if self.risk.max_daily_loss > 0.5:
+            errors.append("max_daily_loss is too high (max 50%)")
