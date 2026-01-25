@@ -1212,3 +1212,10 @@ class ConfigManager:
         if callback in self.callbacks:
             self.callbacks.remove(callback)
             logger.debug(f"Callback unregistered: {callback.__name__}")
+    
+    def _notify_callbacks(self) -> None:
+        for callback in self.callbacks:
+            try:
+                callback(self.config)
+            except Exception as e:
+                logger.error(f"Error in config callback {callback.__name__}: {str(e)}")
