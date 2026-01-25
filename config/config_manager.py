@@ -1337,3 +1337,6 @@ def get_config() -> AppConfig:
 
 def update_config(updates: Dict[str, Any]) -> None:
     get_config_manager().update_config(updates)
+
+def reload_config() -> None:
+    get_config_manager().reload_config()
