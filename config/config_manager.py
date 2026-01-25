@@ -1073,3 +1073,4 @@ class AppConfig:
         else:
             raise AttributeError(f"Configuration has no section: {section}")
         
+class ConfigValidator:
