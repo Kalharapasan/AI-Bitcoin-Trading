@@ -1010,3 +1010,10 @@ class AppConfig:
         
         if self.risk.max_daily_loss > 0.5:
             errors.append("max_daily_loss is too high (max 50%)")
+        
+        if self.data.primary_exchange not in self.api.exchanges:
+            errors.append(f"Primary exchange {self.data.primary_exchange} not configured in API")
+        
+        for exchange in self.data.backup_exchanges:
+            if exchange not in self.api.exchanges:
+                errors.append(f"Backup exchange {exchange} not configured in API")
