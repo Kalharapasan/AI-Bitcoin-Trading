@@ -308,3 +308,72 @@ class ModelArchitecture(BaseModel):
         if len(v) == 0:
             raise ValueError("List cannot be empty")
         return v
+
+class ModelConfig(BaseModel):
+    """Model Configuration"""
+    enabled_models: List[ModelType] = Field(
+        default_factory=lambda: [
+            ModelType.LSTM,
+            ModelType.TRANSFORMER,
+            ModelType.XGBOOST,
+            ModelType.ENSEMBLE
+        ],
+        description="Enabled model types"
+    )
+    
+    architecture: ModelArchitecture = Field(
+        default_factory=ModelArchitecture,
+        description="Model architecture configuration"
+    )
+    
+    ensemble_weights: Dict[str, float] = Field(
+        default_factory=lambda: {
+            'lstm': 0.25,
+            'transformer': 0.25,
+            'attention': 0.20,
+            'xgboost': 0.15,
+            'lightgbm': 0.15
+        },
+        description="Ensemble model weights"
+    )
+    
+    retrain_frequency: str = Field(
+        default="1w",
+        description="Model retraining frequency (1d, 1w, 1m)"
+    )
+    
+    retrain_threshold: float = Field(
+        default=0.85,
+        ge=0.5,
+        le=1.0,
+        description="Retrain threshold (accuracy drop)"
+    )
+    
+    online_learning: bool = Field(
+        default=True,
+        description="Enable online learning"
+    )
+    
+    use_gpu: bool = Field(
+        default=True,
+        description="Use GPU for training"
+    )
+    
+    model_save_path: str = Field(
+        default=str(MODELS_DIR),
+        description="Path to save models"
+    )
+    
+    @field_validator('ensemble_weights')
+    @classmethod
+    def validate_ensemble_weights(cls, v):
+        """Validate ensemble weights sum to 1"""
+        total = sum(v.values())
+        if abs(total - 1.0) > 0.001:
+            raise ValueError(f"Ensemble weights must sum to 1, got {total}")
+        return v
+    
+    class Config:
+        use_enum_values = True
+        validate_assignment = True
+        extra = 'forbid'
