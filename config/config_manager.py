@@ -1166,3 +1166,4 @@ class ConfigValidator:
                     errors.append(f"Ensemble weights must sum to 1, got {total}")
         
         return errors
+    
