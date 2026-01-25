@@ -1020,3 +1020,11 @@ class AppConfig:
         
         if len(self.models.enabled_models) == 0:
             errors.append("At least one model must be enabled")
+        
+        if ModelType.ENSEMBLE in self.models.enabled_models:
+            enabled_model_names = [m.value for m in self.models.enabled_models if m != ModelType.ENSEMBLE]
+            for model_name in self.models.ensemble_weights.keys():
+                if model_name not in enabled_model_names:
+                    errors.append(f"Ensemble weight for {model_name} but model not enabled")
+        
+        return errors
