@@ -1202,3 +1202,8 @@ class ConfigManager:
         except Exception as e:
             logger.error(f"Failed to reload configuration: {str(e)}")
             raise
+    
+    def register_callback(self, callback: callable) -> None:
+        if callback not in self.callbacks:
+            self.callbacks.append(callback)
+            logger.debug(f"Callback registered: {callback.__name__}")
