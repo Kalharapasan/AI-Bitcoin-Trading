@@ -214,3 +214,18 @@ class ModelArchitecture(BaseModel):
         le=0.5,
         description="Transformer dropout rate"
     )
+    
+    cnn_filters: List[int] = Field(
+        default=[64, 128, 256],
+        description="CNN filter sizes"
+    )
+    
+    cnn_kernel_sizes: List[int] = Field(
+        default=[3, 5, 3],
+        description="CNN kernel sizes"
+    )
+    
+    cnn_pool_sizes: List[int] = Field(
+        default=[2, 2, 1],
+        description="CNN pool sizes"
+    )
