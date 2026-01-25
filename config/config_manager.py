@@ -1167,3 +1167,4 @@ class ConfigValidator:
         
         return errors
     
+class ConfigManager:
