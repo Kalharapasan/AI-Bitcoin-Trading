@@ -503,3 +503,15 @@ class TradingConfig(BaseModel):
         if v < 0 or v > 1:
             raise ValueError("Position size must be between 0 and 1")
         return v
+
+    @field_validator('take_profit', 'stop_loss')
+    @classmethod
+    def validate_risk_params(cls, v):
+        if v < 0 or v > 1:
+            raise ValueError("Risk parameters must be between 0 and 1")
+        return v
+    
+    class Config:
+        use_enum_values = True
+        validate_assignment = True
+        extra = 'forbid'
