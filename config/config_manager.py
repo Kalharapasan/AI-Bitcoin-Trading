@@ -480,3 +480,19 @@ class TradingConfig(BaseModel):
         description="Trailing stop distance"
     )
     
+    trading_hours: Optional[Dict[str, List[str]]] = Field(
+        default=None,
+        description="Trading hours by day (e.g., {'mon': ['09:00', '17:00']})"
+    )
+    
+    avoid_high_impact_news: bool = Field(
+        default=True,
+        description="Avoid trading during high-impact news"
+    )
+    
+    news_cooldown_minutes: int = Field(
+        default=30,
+        ge=0,
+        le=240,
+        description="Cooldown period after news (minutes)"
+    )
