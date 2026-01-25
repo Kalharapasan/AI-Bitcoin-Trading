@@ -417,4 +417,29 @@ class TradingConfig(BaseModel):
         ],
         description="Secondary trading strategies"
     )
+    position_sizing: PositionSizing = Field(
+        default=PositionSizing.KELLY,
+        description="Position sizing method"
+    )
+    
+    max_position_size: float = Field(
+        default=0.15,
+        ge=0.01,
+        le=1.0,
+        description="Maximum position size (fraction of portfolio)"
+    )
+    
+    min_position_size: float = Field(
+        default=0.01,
+        ge=0.001,
+        le=0.1,
+        description="Minimum position size"
+    )
+    
+    max_open_positions: int = Field(
+        default=5,
+        ge=1,
+        le=20,
+        description="Maximum open positions"
+    )
     
