@@ -179,3 +179,38 @@ class ModelArchitecture(BaseModel):
         default=True,
         description="Use bidirectional LSTM"
     )
+    
+    transformer_d_model: int = Field(
+        default=64,
+        ge=32,
+        le=512,
+        description="Transformer model dimension"
+    )
+    
+    transformer_nhead: int = Field(
+        default=8,
+        ge=1,
+        le=16,
+        description="Transformer number of attention heads"
+    )
+    
+    transformer_num_layers: int = Field(
+        default=3,
+        ge=1,
+        le=12,
+        description="Transformer number of layers"
+    )
+    
+    transformer_dim_feedforward: int = Field(
+        default=256,
+        ge=64,
+        le=2048,
+        description="Transformer feedforward dimension"
+    )
+    
+    transformer_dropout: float = Field(
+        default=0.1,
+        ge=0.0,
+        le=0.5,
+        description="Transformer dropout rate"
+    )
