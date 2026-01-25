@@ -155,3 +155,4 @@ class APIConfig(BaseModel):
                 raise ValueError(f"Exchange {exchange} requires both api_key and api_secret")
         return v
 
+class ModelArchitecture(BaseModel):
