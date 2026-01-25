@@ -752,3 +752,26 @@ class MonitoringConfig(BaseModel):
         le=60,
         description="Dashboard refresh interval (seconds)"
     )
+    
+    
+    log_level: str = Field(
+        default="INFO",
+        description="Logging level"
+    )
+    
+    log_format: str = Field(
+        default="standard", 
+        description="Log format"
+    )
+    
+    log_retention_days: int = Field(
+        default=30,
+        ge=1,
+        le=365,
+        description="Log retention days"
+    )
+    
+    log_file: str = Field(
+        default=str(LOGS_DIR / "trading.log"),
+        description="Log file path"
+    )
