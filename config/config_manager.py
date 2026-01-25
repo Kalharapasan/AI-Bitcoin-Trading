@@ -1207,3 +1207,8 @@ class ConfigManager:
         if callback not in self.callbacks:
             self.callbacks.append(callback)
             logger.debug(f"Callback registered: {callback.__name__}")
+    
+    def unregister_callback(self, callback: callable) -> None:
+        if callback in self.callbacks:
+            self.callbacks.remove(callback)
+            logger.debug(f"Callback unregistered: {callback.__name__}")
