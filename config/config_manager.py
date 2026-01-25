@@ -972,3 +972,19 @@ class AppConfig:
         return hashlib.md5(config_str.encode()).hexdigest()
 
     def to_dict(self) -> Dict[str, Any]:
+        config_dict = {}
+        for field_name, field_value in self.__dataclass_fields__.items():
+            if field_name in ['version', 'environment', 'config_hash', 
+                            'last_modified', 'config_path']:
+                continue
+            
+            value = getattr(self, field_name)
+            
+            if is_dataclass(value):
+                config_dict[field_name] = asdict(value)
+            elif isinstance(value, BaseModel):
+                config_dict[field_name] = value.dict()
+            else:
+                config_dict[field_name] = value
+        
+        return config_dict
