@@ -92,3 +92,66 @@ class TradingStrategy(str, Enum):
     TREND_FOLLOWING = "trend_following"
     ARBITRAGE = "arbitrage"
     MARKET_MAKING = "market_making"
+
+class APIConfig(BaseModel):
+    """API Configuration Model"""
+    exchanges: Dict[str, Dict[str, str]] = Field(
+        default_factory=lambda: {
+            'binance': {'api_key': '', 'api_secret': '', 'testnet': False},
+            'coinbase': {'api_key': '', 'api_secret': ''},
+            'kraken': {'api_key': '', 'api_secret': ''},
+            'bitstamp': {'api_key': '', 'api_secret': ''}
+        },
+        description="Exchange API configurations"
+    )
+    
+    data_providers: Dict[str, Dict[str, str]] = Field(
+        default_factory=lambda: {
+            'cryptocompare': {'api_key': ''},
+            'glassnode': {'api_key': ''},
+            'coingecko': {'api_key': ''}
+        },
+        description="Data provider API configurations"
+    )
+    
+    sentiment_apis: Dict[str, Dict[str, str]] = Field(
+        default_factory=lambda: {
+            'twitter': {'bearer_token': ''},
+            'reddit': {'client_id': '', 'client_secret': ''},
+            'newsapi': {'api_key': ''}
+        },
+        description="Sentiment API configurations"
+    )
+    
+    rate_limit_multiplier: float = Field(
+        default=0.8,
+        ge=0.1,
+        le=1.0,
+        description="Multiplier for rate limits (0.1-1.0)"
+    )
+    
+    timeout: int = Field(
+        default=30,
+        ge=5,
+        le=120,
+        description="API timeout in seconds"
+    )
+    
+    retry_attempts: int = Field(
+        default=3,
+        ge=1,
+        le=10,
+        description="Number of API retry attempts"
+    )
+    
+    model_config = ConfigDict(validate_assignment=True, extra='forbid')
+    
+    @field_validator('exchanges')
+    @classmethod
+    def validate_exchange_credentials(cls, v):
+        """Validate exchange credentials"""
+        for exchange, creds in v.items():
+            if creds.get('api_key') and not creds.get('api_secret'):
+                raise ValueError(f"Exchange {exchange} requires both api_key and api_secret")
+        return v
+
