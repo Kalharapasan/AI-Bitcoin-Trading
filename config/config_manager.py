@@ -156,3 +156,26 @@ class APIConfig(BaseModel):
         return v
 
 class ModelArchitecture(BaseModel):
+    lstm_layers: List[int] = Field(
+        default=[128, 64, 32],
+        description="LSTM layer sizes"
+    )
+    
+    lstm_dropout: float = Field(
+        default=0.3,
+        ge=0.0,
+        le=0.5,
+        description="LSTM dropout rate"
+    )
+    
+    lstm_recurrent_dropout: float = Field(
+        default=0.2,
+        ge=0.0,
+        le=0.5,
+        description="LSTM recurrent dropout rate"
+    )
+    
+    lstm_bidirectional: bool = Field(
+        default=True,
+        description="Use bidirectional LSTM"
+    )
