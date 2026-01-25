@@ -876,3 +876,10 @@ class BacktestConfig(BaseModel):
 
 @dataclass
 class AppConfig:
+    api: APIConfig = field(default_factory=APIConfig)
+    trading: TradingConfig = field(default_factory=TradingConfig)
+    models: ModelConfig = field(default_factory=ModelConfig)
+    risk: RiskConfig = field(default_factory=RiskConfig)
+    data: DataConfig = field(default_factory=DataConfig)
+    monitoring: MonitoringConfig = field(default_factory=MonitoringConfig)
+    backtest: BacktestConfig = field(default_factory=BacktestConfig)
