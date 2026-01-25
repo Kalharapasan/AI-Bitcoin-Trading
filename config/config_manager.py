@@ -718,3 +718,18 @@ class MonitoringConfig(BaseModel):
         default=False,
         description="Push metrics to Prometheus"
     )
+    alert_channels: List[str] = Field(
+        default_factory=lambda: ["console", "email"],
+        description="Alert channels"
+    )
+    
+    alert_thresholds: Dict[str, float] = Field(
+        default_factory=lambda: {
+            "drawdown": 0.05,
+            "loss_streak": 3,
+            "low_confidence": 0.7,
+            "high_slippage": 0.005,
+            "high_latency": 2000
+        },
+        description="Alert thresholds"
+    )
