@@ -1028,3 +1028,19 @@ class AppConfig:
                     errors.append(f"Ensemble weight for {model_name} but model not enabled")
         
         return errors
+    
+    def update_from_dict(self, updates: Dict[str, Any]) -> None:
+        for section, values in updates.items():
+            if hasattr(self, section):
+                section_obj = getattr(self, section)
+                
+                if is_dataclass(section_obj):
+                    for key, value in values.items():
+                        if hasattr(section_obj, key):
+                            setattr(section_obj, key, value)
+                
+                elif isinstance(section_obj, BaseModel):
+                    current_dict = section_obj.dict()
+                    current_dict.update(values)
+                    setattr(self, section, type(section_obj)(**current_dict))
+        self.config_hash = self.calculate_hash()
