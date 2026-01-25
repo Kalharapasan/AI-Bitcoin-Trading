@@ -655,3 +655,37 @@ class DataConfig(BaseModel):
         ],
         description="Sentiment metrics to collect"
     )
+    
+    realtime_enabled: bool = Field(
+        default=True,
+        description="Enable real-time data collection"
+    )
+    
+    websocket_enabled: bool = Field(
+        default=True,
+        description="Enable WebSocket connections"
+    )
+    
+    historical_days: int = Field(
+        default=365,
+        ge=30,
+        le=3650,
+        description="Days of historical data to collect"
+    )
+    
+    data_save_path: str = Field(
+        default=str(DATA_DIR),
+        description="Path to save data"
+    )
+    
+    cache_enabled: bool = Field(
+        default=True,
+        description="Enable data caching"
+    )
+    
+    cache_ttl: int = Field(
+        default=3600,
+        ge=60,
+        le=86400,
+        description="Cache time-to-live (seconds)"
+    )
