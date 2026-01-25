@@ -1377,3 +1377,5 @@ def merge_configs(base_config: AppConfig, override_config: Dict[str, Any]) -> Ap
     merged.update_from_dict(override_config)
     return merged
 
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
