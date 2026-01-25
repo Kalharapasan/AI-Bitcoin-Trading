@@ -1352,3 +1352,5 @@ def register_config_callback(callback: callable) -> None:
 
 def unregister_config_callback(callback: callable) -> None:
     get_config_manager().unregister_callback(callback)
+
+def create_default_config(config_path: Union[str, Path] = None) -> AppConfig:
