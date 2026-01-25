@@ -1219,3 +1219,35 @@ class ConfigManager:
                 callback(self.config)
             except Exception as e:
                 logger.error(f"Error in config callback {callback.__name__}: {str(e)}")
+    
+    def start_watcher(self) -> None:
+        if self.observer is not None:
+            logger.warning("Configuration watcher already running")
+            return
+        
+        class ConfigFileHandler(FileSystemEventHandler):
+            def __init__(self, manager):
+                self.manager = manager
+            
+            def on_modified(self, event):
+                if event.src_path == str(self.manager.config_path):
+                    logger.info(f"Configuration file modified: {event.src_path}")
+                    try:
+                        self.manager.reload_config()
+                    except Exception as e:
+                        logger.error(f"Failed to reload config on modification: {str(e)}")
+        
+        try:
+            self.observer = Observer()
+            event_handler = ConfigFileHandler(self)
+            self.observer.schedule(event_handler, path=str(self.config_path.parent), recursive=False)
+            self.observer.start()
+            self.running = True
+            self.watch_thread = threading.Thread(target=self._watch_config, daemon=True)
+            self.watch_thread.start()
+            
+            logger.info("Configuration watcher started")
+            
+        except Exception as e:
+            logger.error(f"Failed to start configuration watcher: {str(e)}")
+            self.observer = None
