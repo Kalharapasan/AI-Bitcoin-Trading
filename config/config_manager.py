@@ -871,3 +871,5 @@ class BacktestConfig(BaseModel):
         except ValueError:
             raise ValueError(f"Invalid date format: {v}. Use YYYY-MM-DD")
         return v
+
+    model_config = ConfigDict(validate_assignment=True, extra='forbid')
