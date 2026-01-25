@@ -1354,3 +1354,9 @@ def unregister_config_callback(callback: callable) -> None:
     get_config_manager().unregister_callback(callback)
 
 def create_default_config(config_path: Union[str, Path] = None) -> AppConfig:
+    if config_path is None:
+        config_path = CONFIG_DIR / "config.yaml"
+    
+    config = AppConfig()
+    config.save(config_path)
+    return config
