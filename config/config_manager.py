@@ -1072,3 +1072,4 @@ class AppConfig:
             self.config_hash = self.calculate_hash()
         else:
             raise AttributeError(f"Configuration has no section: {section}")
+        
