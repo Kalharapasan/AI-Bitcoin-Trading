@@ -1156,3 +1156,13 @@ class ConfigValidator:
             if 'stop_loss' in trading and 'take_profit' in trading:
                 if trading['stop_loss'] >= trading['take_profit']:
                     errors.append("stop_loss must be less than take_profit")
+            
+        if 'models' in config_data:
+            models = config_data['models']
+            if 'ensemble_weights' in models:
+                weights = models['ensemble_weights']
+                total = sum(weights.values())
+                if abs(total - 1.0) > 0.001:
+                    errors.append(f"Ensemble weights must sum to 1, got {total}")
+        
+        return errors
