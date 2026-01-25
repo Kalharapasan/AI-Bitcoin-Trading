@@ -1376,3 +1376,4 @@ def merge_configs(base_config: AppConfig, override_config: Dict[str, Any]) -> Ap
     merged = base_config.clone()
     merged.update_from_dict(override_config)
     return merged
+
