@@ -970,3 +970,5 @@ class AppConfig:
         config_dict = self.to_dict()
         config_str = json.dumps(config_dict, default=str, sort_keys=True)
         return hashlib.md5(config_str.encode()).hexdigest()
+
+    def to_dict(self) -> Dict[str, Any]:
