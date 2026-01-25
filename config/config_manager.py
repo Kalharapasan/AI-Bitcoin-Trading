@@ -515,3 +515,5 @@ class TradingConfig(BaseModel):
         use_enum_values = True
         validate_assignment = True
         extra = 'forbid'
+        
+class RiskConfig(BaseModel):
