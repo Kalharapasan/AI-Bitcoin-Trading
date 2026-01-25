@@ -775,3 +775,10 @@ class MonitoringConfig(BaseModel):
         default=str(LOGS_DIR / "trading.log"),
         description="Log file path"
     )
+    performance_metrics: List[str] = Field(
+        default_factory=lambda: [
+            "sharpe_ratio", "sortino_ratio", "max_drawdown",
+            "win_rate", "profit_factor", "calmar_ratio"
+        ],
+        description="Performance metrics to track"
+    )
