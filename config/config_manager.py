@@ -1168,3 +1168,12 @@ class ConfigValidator:
         return errors
     
 class ConfigManager:
+    def __init__(self, config_path: Union[str, Path] = None):
+        self.config_path = Path(config_path) if config_path else CONFIG_DIR / "config.yaml"
+        self.config = AppConfig.load(self.config_path)
+        self.observer = None
+        self.watch_thread = None
+        self.callbacks = []
+        self.running = False
+        
+        logger.info(f"Configuration manager initialized with config: {self.config_path}")
