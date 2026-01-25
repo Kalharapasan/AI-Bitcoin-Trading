@@ -995,3 +995,6 @@ class AppConfig:
     def validate(self) -> List[str]:
         
         errors = []
+        if self.trading.mode in [TradingMode.PAPER, TradingMode.LIVE]:
+            if not self.api.exchanges:
+                errors.append("API exchanges configuration required for trading mode")
