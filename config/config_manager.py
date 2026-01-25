@@ -998,3 +998,9 @@ class AppConfig:
         if self.trading.mode in [TradingMode.PAPER, TradingMode.LIVE]:
             if not self.api.exchanges:
                 errors.append("API exchanges configuration required for trading mode")
+            
+            primary_exchange = self.data.primary_exchange
+            if primary_exchange in self.api.exchanges:
+                creds = self.api.exchanges[primary_exchange]
+                if not creds.get('api_key') or not creds.get('api_secret'):
+                    errors.append(f"API credentials missing for primary exchange: {primary_exchange}")
