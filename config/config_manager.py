@@ -1138,3 +1138,12 @@ class ConfigValidator:
         },
         "required": ["api", "trading", "models"]
     }
+    
+    @staticmethod
+    def validate_config(config_data: Dict[str, Any]) -> List[str]:
+        errors = []
+        
+        try:
+            jsonschema.validate(config_data, ConfigValidator.SCHEMA)
+        except jsonschema.ValidationError as e:
+            errors.append(str(e))
