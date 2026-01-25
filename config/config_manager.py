@@ -1284,3 +1284,7 @@ class ConfigManager:
                 self.watch_thread = None
             
             logger.info("Configuration watcher stopped")
+    
+    def validate_current_config(self) -> Tuple[bool, List[str]]:
+        errors = self.config.validate()
+        return len(errors) == 0, errors
