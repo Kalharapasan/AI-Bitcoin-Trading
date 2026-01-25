@@ -1360,3 +1360,14 @@ def create_default_config(config_path: Union[str, Path] = None) -> AppConfig:
     config = AppConfig()
     config.save(config_path)
     return config
+
+def validate_config_file(config_path: Union[str, Path]) -> Tuple[bool, List[str]]:
+    try:
+        with open(config_path, 'r') as f:
+            config_data = yaml.safe_load(f)
+        
+        errors = ConfigValidator.validate_config(config_data or {})
+        return len(errors) == 0, errors
+        
+    except Exception as e:
+        return False, [str(e)]
