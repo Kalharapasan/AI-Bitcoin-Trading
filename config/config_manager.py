@@ -1182,3 +1182,10 @@ class ConfigManager:
         return self.config
 
     def update_config(self, updates: Dict[str, Any]) -> None:
+        temp_config = self.config.clone()
+        temp_config.update_from_dict(updates)
+        
+        errors = temp_config.validate()
+        if errors:
+            raise ValueError(f"Configuration validation failed: {errors}")
+        
