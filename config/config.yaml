@@ -1,0 +1,840 @@
+# Bitcoin Trading AI Configuration
+# Version: 1.0.0
+# Environment: development
+
+# ============ Application Metadata ============
+app:
+  name: "Bitcoin Trading AI"
+  version: "1.0.0"
+  description: "Advanced AI-powered Bitcoin Trading System"
+  environment: "development"
+  timezone: "UTC"
+  debug: true
+  testing: false
+
+# ============ Trading Configuration ============
+trading:
+  # Trading Mode
+  mode: "paper"  # backtest, paper, live
+  
+  # Instrument
+  symbol: "BTC/USDT"
+  timeframe: "1h"  # 1m, 5m, 15m, 30m, 1h, 4h, 12h, 1d, 1w
+  
+  # Capital
+  initial_capital: 10000.0
+  base_currency: "USDT"
+  quote_currency: "BTC"
+  
+  # Strategy
+  primary_strategy: "ml_ensemble"
+  secondary_strategies:
+    - "trend_following"
+    - "mean_reversion"
+  
+  # Position Management
+  position_sizing: "kelly"  # kelly, fixed, volatility, optimal_f, martingale, anti_martingale
+  max_position_size: 0.15  # 15% of portfolio
+  min_position_size: 0.01  # 1% of portfolio
+  max_open_positions: 5
+  allow_short_selling: true
+  max_leverage: 1.0
+  
+  # Order Management
+  default_order_type: "limit"  # market, limit, stop, stop_limit
+  slippage_tolerance: 0.001  # 0.1%
+  commission: 0.001  # 0.1%
+  
+  # Stop Loss & Take Profit
+  stop_loss: 0.02  # 2%
+  take_profit: 0.05  # 5%
+  trailing_stop: true
+  trailing_distance: 0.01  # 1%
+  breakeven_stop: true
+  breakeven_at: 0.01  # Move to breakeven at 1% profit
+  
+  # Partial Exits
+  partial_exits: true
+  exit_points:
+    - target: 0.5  # 50% of position at 50% of take profit
+      size: 0.5
+    - target: 1.0  # Remaining 50% at full take profit
+      size: 0.5
+  
+  # Trading Hours (UTC)
+  trading_hours:
+    enabled: false
+    schedule:
+      monday: ["00:00", "23:59"]
+      tuesday: ["00:00", "23:59"]
+      wednesday: ["00:00", "23:59"]
+      thursday: ["00:00", "23:59"]
+      friday: ["00:00", "23:59"]
+      saturday: ["00:00", "23:59"]
+      sunday: ["00:00", "23:59"]
+  
+  # Market Filters
+  min_volume_24h: 1000000  # $1M minimum daily volume
+  min_price: 1.0
+  min_liquidity: 0.1
+  
+  # News Avoidance
+  avoid_high_impact_news: true
+  news_cooldown_minutes: 30
+
+# ============ Model Configuration ============
+models:
+  # Enabled Models
+  enabled_models:
+    - "lstm"
+    - "transformer"
+    - "xgboost"
+    - "ensemble"
+  
+  # Model Architecture
+  architecture:
+    # LSTM Configuration
+    lstm:
+      units: [128, 64, 32]
+      dropout: 0.3
+      recurrent_dropout: 0.2
+      bidirectional: true
+      activation: "tanh"
+      recurrent_activation: "sigmoid"
+    
+    # Transformer Configuration
+    transformer:
+      d_model: 64
+      nhead: 8
+      num_layers: 3
+      dim_feedforward: 256
+      dropout: 0.1
+      activation: "gelu"
+    
+    # CNN-LSTM Configuration
+    cnn_lstm:
+      cnn_filters: [64, 128, 256]
+      cnn_kernel_sizes: [3, 5, 3]
+      cnn_pool_sizes: [2, 2, 1]
+      lstm_units: 128
+      lstm_layers: 2
+      dropout: 0.3
+    
+    # XGBoost Configuration
+    xgboost:
+      n_estimators: 200
+      max_depth: 8
+      learning_rate: 0.05
+      subsample: 0.8
+      colsample_bytree: 0.8
+      gamma: 0.1
+      reg_alpha: 0.1
+      reg_lambda: 1.0
+    
+    # LightGBM Configuration
+    lightgbm:
+      n_estimators: 200
+      num_leaves: 31
+      learning_rate: 0.05
+      subsample: 0.8
+      colsample_bytree: 0.8
+      reg_alpha: 0.1
+      reg_lambda: 0.1
+  
+  # Sequence Configuration
+  sequence_length: 60
+  prediction_horizon: 24
+  feature_count: 50
+  
+  # Training Configuration
+  training:
+    batch_size: 32
+    epochs: 100
+    learning_rate: 0.001
+    weight_decay: 0.0001
+    patience: 20
+    min_delta: 0.001
+    validation_split: 0.2
+    shuffle: true
+    use_early_stopping: true
+    use_reduce_lr: true
+    use_checkpoints: true
+  
+  # Ensemble Configuration
+  ensemble_weights:
+    lstm: 0.25
+    transformer: 0.25
+    xgboost: 0.25
+    lightgbm: 0.25
+  
+  # Model Management
+  retrain_frequency: "1w"  # 1d, 1w, 1m
+  retrain_threshold: 0.85  # Retrain if accuracy drops below 85%
+  online_learning: true
+  use_gpu: true
+  model_save_path: "models/"
+  
+  # Feature Engineering
+  feature_engineering:
+    technical_indicators:
+      - "sma_20"
+      - "sma_50"
+      - "ema_12"
+      - "ema_26"
+      - "rsi"
+      - "macd"
+      - "bollinger_upper"
+      - "bollinger_lower"
+      - "atr"
+      - "adx"
+      - "stoch_k"
+      - "stoch_d"
+      - "obv"
+      - "mfi"
+      - "cci"
+      - "williams_r"
+    
+    statistical_features:
+      - "returns"
+      - "log_returns"
+      - "volatility"
+      - "skewness"
+      - "kurtosis"
+      - "zscore"
+      - "autocorrelation"
+      - "hurst"
+    
+    time_features:
+      - "hour"
+      - "day_of_week"
+      - "day_of_month"
+      - "month"
+      - "is_weekend"
+      - "is_month_end"
+    
+    window_sizes: [5, 10, 20, 50, 100]
+    lag_periods: [1, 2, 3, 5, 10]
+
+# ============ Risk Management ============
+risk:
+  # Risk Limits
+  max_daily_loss: 0.02  # 2%
+  max_drawdown: 0.15  # 15%
+  max_position_risk: 0.02  # 2% per position
+  max_portfolio_risk: 0.15  # 15% total portfolio risk
+  max_correlation: 0.7  # Maximum correlation between positions
+  
+  # Risk Metrics
+  var_confidence: 0.95  # 95% VaR
+  cvar_confidence: 0.99  # 99% CVaR
+  stress_test_confidence: 0.999
+  
+  # Circuit Breakers
+  circuit_breakers:
+    price_change_1min: 0.05  # 5% in 1 minute
+    price_change_5min: 0.10  # 10% in 5 minutes
+    price_change_1hour: 0.20  # 20% in 1 hour
+    volume_spike: 10.0  # 10x volume spike
+    volatility_spike: 5.0  # 5x volatility spike
+    order_book_imbalance: 3.0  # 3x order book imbalance
+  
+  # Position Limits
+  max_daily_trades: 50
+  max_consecutive_losses: 5
+  max_position_duration_days: 30
+  
+  # Liquidity Requirements
+  min_liquidity_score: 0.5
+  min_volume_ratio: 0.1
+  
+  # Stress Testing
+  stress_test_scenarios:
+    - "flash_crash"
+    - "liquidity_crisis"
+    - "volatility_spike"
+    - "exchange_outage"
+    - "regulatory_shock"
+  
+  stress_test_frequency: "1d"  # Run daily
+  
+  # Risk Models
+  risk_models:
+    - "value_at_risk"
+    - "expected_shortfall"
+    - "monte_carlo"
+    - "stress_testing"
+    - "correlation_analysis"
+  
+  # Market Regime Detection
+  market_regime_detection: true
+  regime_switching: true
+
+# ============ Data Configuration ============
+data:
+  # Data Sources
+  primary_exchange: "binance"
+  backup_exchanges:
+    - "coinbase"
+    - "kraken"
+    - "bitstamp"
+  
+  # Data Collection
+  realtime_enabled: true
+  websocket_enabled: true
+  historical_days: 365
+  update_frequency: 60  # seconds
+  max_retries: 3
+  retry_delay: 5  # seconds
+  timeout: 30  # seconds
+  
+  # Data Quality
+  data_quality_threshold: 0.95
+  max_data_latency_ms: 1000
+  max_missing_pct: 0.05
+  max_outlier_pct: 0.01
+  
+  # Feature Engineering
+  technical_indicators:
+    - "sma"
+    - "ema"
+    - "rsi"
+    - "macd"
+    - "bollinger"
+    - "atr"
+    - "adx"
+    - "stoch"
+    - "obv"
+    - "mfi"
+    - "cci"
+    - "williams_r"
+  
+  onchain_metrics:
+    - "hash_rate"
+    - "active_addresses"
+    - "transaction_count"
+    - "miner_revenue"
+    - "exchange_flows"
+    - "mvr_ratio"
+    - "nupl"
+    - "sopr"
+  
+  sentiment_metrics:
+    - "fear_greed_index"
+    - "twitter_sentiment"
+    - "reddit_sentiment"
+    - "news_sentiment"
+    - "social_volume"
+  
+  # Data Storage
+  data_save_path: "data/"
+  cache_enabled: true
+  cache_ttl: 3600  # 1 hour
+  compress_data: true
+  encrypt_sensitive_data: true
+  
+  # Data Validation
+  price_change_limit: 0.50  # Maximum 50% price change
+  volume_spike_limit: 10.0  # Maximum 10x volume spike
+  correlation_threshold: 0.95
+
+# ============ API Configuration ============
+api:
+  # Exchange APIs
+  exchanges:
+    binance:
+      api_key: ""  # Your Binance API key
+      api_secret: ""  # Your Binance API secret
+      testnet: true
+      enable_rate_limit: true
+      timeout: 30000
+    
+    coinbase:
+      api_key: ""  # Your Coinbase API key
+      api_secret: ""  # Your Coinbase API secret
+      testnet: false
+    
+    kraken:
+      api_key: ""  # Your Kraken API key
+      api_secret: ""  # Your Kraken API secret
+      testnet: false
+    
+    bitstamp:
+      api_key: ""  # Your Bitstamp API key
+      api_secret: ""  # Your Bitstamp API secret
+      testnet: false
+  
+  # Data Provider APIs
+  data_providers:
+    cryptocompare:
+      api_key: ""  # Your CryptoCompare API key
+      enabled: true
+    
+    glassnode:
+      api_key: ""  # Your Glassnode API key
+      enabled: true
+    
+    coingecko:
+      api_key: ""  # Your CoinGecko API key
+      enabled: true
+    
+    newsapi:
+      api_key: ""  # Your NewsAPI key
+      enabled: true
+  
+  # Sentiment APIs
+  sentiment_apis:
+    twitter:
+      bearer_token: ""  # Your Twitter Bearer Token
+      enabled: true
+    
+    reddit:
+      client_id: ""  # Your Reddit Client ID
+      client_secret: ""  # Your Reddit Client Secret
+      enabled: true
+  
+  # API Settings
+  rate_limit_multiplier: 0.8
+  timeout: 30
+  retry_attempts: 3
+  retry_backoff: 2.0
+  max_connections: 100
+
+# ============ Monitoring & Logging ============
+monitoring:
+  # Metrics
+  metrics_enabled: true
+  metrics_port: 9090
+  push_to_prometheus: false
+  prometheus_url: "http://localhost:9090"
+  
+  # Alerting
+  alert_channels:
+    - "console"
+    - "email"
+    - "slack"
+    - "telegram"
+  
+  alert_thresholds:
+    drawdown: 0.05  # Alert on 5% drawdown
+    loss_streak: 3  # Alert after 3 consecutive losses
+    low_confidence: 0.7  # Alert on low model confidence
+    high_slippage: 0.005  # Alert on high slippage
+    api_error: 5  # Alert after 5 API errors
+    data_latency: 5000  # Alert on 5-second data latency
+  
+  # Dashboard
+  dashboard_enabled: true
+  dashboard_port: 8050
+  dashboard_refresh_interval: 5  # seconds
+  dashboard_theme: "dark"
+  enable_live_updates: true
+  enable_export: true
+  
+  # Logging
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  log_format: "standard"  # standard, json
+  log_retention_days: 30
+  log_file: "logs/trading.log"
+  
+  # Performance Tracking
+  performance_metrics:
+    - "total_return"
+    - "annual_return"
+    - "volatility"
+    - "sharpe_ratio"
+    - "sortino_ratio"
+    - "max_drawdown"
+    - "calmar_ratio"
+    - "omega_ratio"
+    - "win_rate"
+    - "profit_factor"
+    - "average_win"
+    - "average_loss"
+    - "expectancy"
+  
+  # Health Checks
+  health_check_interval: 60  # seconds
+  system_metrics: true
+  trading_metrics: true
+  model_metrics: true
+
+# ============ Backtesting Configuration ============
+backtest:
+  # Date Range
+  start_date: "2023-01-01"
+  end_date: "2024-01-01"
+  
+  # Capital & Fees
+  initial_capital: 10000.0
+  commission: 0.001  # 0.1%
+  slippage: 0.001  # 0.1%
+  
+  # Walk-forward Testing
+  walk_forward: true
+  training_window: 180  # days
+  testing_window: 30  # days
+  step_size: 30  # days
+  
+  # Monte Carlo Simulation
+  monte_carlo_simulations: 1000
+  monte_carlo_confidence: 0.95
+  
+  # Optimization
+  optimization_method: "grid_search"  # grid_search, random_search, bayesian, genetic
+  optimization_metric: "sharpe_ratio"
+  optimization_iterations: 100
+  
+  # Metrics
+  metrics:
+    - "sharpe_ratio"
+    - "sortino_ratio"
+    - "max_drawdown"
+    - "win_rate"
+    - "profit_factor"
+    - "calmar_ratio"
+    - "omega_ratio"
+    - "value_at_risk"
+    - "expected_shortfall"
+    - "ulcer_index"
+    - "martin_ratio"
+  
+  # Results
+  results_save_path: "results/backtest/"
+  save_full_results: true
+  generate_report: true
+  report_format: "html"  # html, pdf, json
+
+# ============ Database Configuration ============
+database:
+  # Primary Database
+  type: "sqlite"  # sqlite, postgresql, mysql
+  url: "sqlite:///data/trading.db"
+  
+  # Redis Cache
+  redis:
+    enabled: true
+    url: "redis://localhost:6379/0"
+    password: ""
+    db: 0
+  
+  # Connection Pools
+  pool_size: 20
+  max_overflow: 10
+  pool_timeout: 30
+  pool_recycle: 3600
+  
+  # Caching
+  cache:
+    enabled: true
+    ttl: 3600  # 1 hour
+    max_size: 10000
+    compression: true
+    encryption: false
+  
+  # Tables
+  tables:
+    trades: "trades"
+    orders: "orders"
+    positions: "positions"
+    market_data: "market_data"
+    models: "models"
+    backtest_results: "backtest_results"
+
+# ============ Web Configuration ============
+web:
+  # REST API
+  rest_api:
+    enabled: true
+    host: "0.0.0.0"
+    port: 8000
+    debug: true
+    workers: 4
+    timeout: 30
+    cors_origins: ["*"]
+    rate_limit: "100/minute"
+    enable_docs: true
+    enable_metrics: true
+  
+  # WebSocket
+  websocket:
+    enabled: true
+    host: "0.0.0.0"
+    port: 8765
+    ping_interval: 20
+    ping_timeout: 30
+    max_message_size: 10485760  # 10MB
+  
+  # Authentication
+  authentication:
+    enabled: true
+    jwt_secret: "your-secret-key-change-in-production"  # CHANGE IN PRODUCTION
+    jwt_algorithm: "HS256"
+    jwt_expiration: 3600  # 1 hour
+    api_key_header: "X-API-Key"
+    require_https: false  # Set to true in production
+  
+  # Static Files
+  static_files:
+    enabled: true
+    path: "web/static/"
+    cache_max_age: 3600
+
+# ============ Security Configuration ============
+security:
+  # Encryption
+  encryption:
+    algorithm: "AES-256-GCM"
+    key_derivation: "PBKDF2"
+    iterations: 100000
+    salt_length: 16
+    nonce_length: 12
+    tag_length: 16
+  
+  # API Keys
+  api_keys:
+    encrypt_at_rest: true
+    key_rotation_days: 90
+    max_keys_per_user: 5
+    key_format: "hex"
+    key_length: 32
+  
+  # Network Security
+  network_security:
+    enable_firewall: true
+    rate_limiting: true
+    ip_whitelist: []
+    ip_blacklist: []
+    require_vpn: false
+    enable_ssl: false  # Set to true in production
+    ssl_cert_path: ""
+    ssl_key_path: ""
+  
+  # Data Protection
+  data_protection:
+    encrypt_sensitive_data: true
+    mask_api_keys: true
+    log_sanitization: true
+    data_retention_days: 90
+    secure_deletion: true
+
+# ============ Performance Configuration ============
+performance:
+  # Parallel Processing
+  parallel_processing:
+    enabled: true
+    max_workers: 4
+    thread_pool_size: 10
+    process_pool_size: 4
+    use_gpu: true
+    gpu_memory_fraction: 0.8
+  
+  # Memory Management
+  memory_management:
+    max_memory_usage: 0.8  # 80% of system memory
+    cache_size: 10000
+    garbage_collection: true
+    gc_threshold: [700, 10, 10]
+    memory_monitoring: true
+    memory_warning_threshold: 0.7
+  
+  # Optimization
+  optimization:
+    use_jit: true
+    use_mkl: true
+    use_cudnn: true
+    tensorflow_memory_growth: true
+    pytorch_benchmark: false
+    numpy_threads: 4
+  
+  # Batch Processing
+  batch_processing:
+    data_batch_size: 1000
+    training_batch_size: 32
+    prediction_batch_size: 64
+    inference_batch_size: 128
+    stream_buffer_size: 10000
+
+# ============ Feature Flags ============
+feature_flags:
+  # Model Features
+  models:
+    enable_transformer: true
+    enable_lstm: true
+    enable_ensemble: true
+    enable_deep_rl: false  # Experimental
+    enable_online_learning: true
+    enable_transfer_learning: true
+    enable_meta_learning: false  # Experimental
+  
+  # Trading Features
+  trading:
+    enable_short_selling: true
+    enable_margin_trading: false
+    enable_options_trading: false
+    enable_futures_trading: false
+    enable_arbitrage: true
+    enable_market_making: false
+    enable_hedging: true
+  
+  # Data Features
+  data:
+    enable_sentiment_analysis: true
+    enable_onchain_analysis: true
+    enable_social_metrics: true
+    enable_news_analysis: true
+    enable_alternative_data: false
+    enable_real_time_streaming: true
+  
+  # Risk Features
+  risk:
+    enable_stress_testing: true
+    enable_monte_carlo: true
+    enable_scenario_analysis: true
+    enable_correlation_analysis: true
+    enable_liquidity_analysis: true
+    enable_volatility_forecasting: true
+
+# ============ System Configuration ============
+system:
+  # Process Management
+  process:
+    max_restarts: 3
+    restart_delay: 5
+    graceful_shutdown_timeout: 30
+    heartbeat_interval: 10
+  
+  # File System
+  file_system:
+    max_file_size: 1073741824  # 1GB
+    backup_enabled: true
+    backup_frequency: "daily"
+    backup_retention_days: 30
+  
+  # Network
+  network:
+    max_bandwidth: 0  # 0 = unlimited
+    proxy_enabled: false
+    proxy_url: ""
+    dns_timeout: 5
+  
+  # Updates
+  updates:
+    auto_update: false
+    update_check_interval: 86400  # 24 hours
+    notify_on_update: true
+
+# ============ Notification Configuration ============
+notifications:
+  # Email
+  email:
+    enabled: false
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    username: ""
+    password: ""
+    from_address: ""
+    to_addresses: []
+    use_tls: true
+  
+  # Slack
+  slack:
+    enabled: false
+    webhook_url: ""
+    channel: "#trading-alerts"
+    username: "Trading Bot"
+    icon_emoji: ":robot_face:"
+  
+  # Telegram
+  telegram:
+    enabled: false
+    bot_token: ""
+    chat_id: ""
+  
+  # Webhook
+  webhook:
+    enabled: false
+    url: ""
+    secret: ""
+    timeout: 10
+  
+  # Notification Levels
+  levels:
+    info: false
+    warning: true
+    error: true
+    critical: true
+
+# ============ External Services ============
+external_services:
+  # Sentiment Analysis
+  sentiment:
+    openai:
+      enabled: false
+      api_key: ""
+      model: "gpt-3.5-turbo"
+      max_tokens: 100
+    
+    google_nlp:
+      enabled: false
+      api_key: ""
+  
+  # News Aggregation
+  news:
+    newsapi:
+      enabled: false
+      api_key: ""
+    
+    cryptopanic:
+      enabled: false
+      api_key: ""
+  
+  # Analytics
+  analytics:
+    google_analytics:
+      enabled: false
+      tracking_id: ""
+    
+    mixpanel:
+      enabled: false
+      token: ""
+  
+  # Cloud Services
+  cloud:
+    aws:
+      enabled: false
+      access_key: ""
+      secret_key: ""
+      region: "us-east-1"
+    
+    google_cloud:
+      enabled: false
+      credentials_file: ""
+
+# ============ Development Settings ============
+development:
+  # Debugging
+  debug_trading: true
+  debug_models: true
+  debug_data: true
+  debug_api: true
+  
+  # Testing
+  use_testnet: true
+  mock_external_apis: true
+  simulate_latency: false
+  simulate_errors: false
+  
+  # Profiling
+  enable_profiling: true
+  profiling_output: "profiling/"
+  profiling_samples: 1000
+  
+  # Hot Reload
+  enable_hot_reload: true
+  watch_config: true
+  watch_models: true
+  
+  # Logging
+  verbose_logging: true
+  log_to_console: true
+  log_to_file: true
