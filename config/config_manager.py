@@ -1301,3 +1301,8 @@ class ConfigManager:
             'last_modified': self.config.last_modified.isoformat(),
             'config_hash': self.config.config_hash
         }
+    
+    def export_config(self, export_path: Union[str, Path]) -> None:
+        export_path = Path(export_path)
+        self.config.save(export_path)
+        logger.info(f"Configuration exported to {export_path}")
