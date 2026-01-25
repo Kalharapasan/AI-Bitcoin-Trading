@@ -1405,3 +1405,10 @@ if __name__ == "__main__":
         print("Configuration updated successfully")
     except ValueError as e:
         print(f"Update failed: {str(e)}")
+    
+    print("\n=== Configuration Summary ===")
+    summary = config_manager.get_config_summary()
+    for key, value in summary.items():
+        print(f"{key}: {value}")
+    
+    print("\nConfiguration manager example completed")
