@@ -277,3 +277,34 @@ class ModelArchitecture(BaseModel):
         le=100,
         description="Early stopping patience"
     )
+    
+    sequence_length: int = Field(
+        default=60,
+        ge=10,
+        le=500,
+        description="Input sequence length"
+    )
+    
+    prediction_horizon: int = Field(
+        default=24,
+        ge=1,
+        le=100,
+        description="Prediction horizon"
+    )
+    
+    feature_count: int = Field(
+        default=50,
+        ge=10,
+        le=200,
+        description="Number of features"
+    )
+    
+    model_config = ConfigDict(validate_assignment=True, extra='forbid')
+    
+    @field_validator('lstm_layers', 'cnn_filters', 'cnn_kernel_sizes', 'cnn_pool_sizes')
+    @classmethod
+    def validate_list_length(cls, v):
+        """Validate list lengths"""
+        if len(v) == 0:
+            raise ValueError("List cannot be empty")
+        return v
