@@ -94,7 +94,6 @@ class TradingStrategy(str, Enum):
     MARKET_MAKING = "market_making"
 
 class APIConfig(BaseModel):
-    """API Configuration Model"""
     exchanges: Dict[str, Dict[str, str]] = Field(
         default_factory=lambda: {
             'binance': {'api_key': '', 'api_secret': '', 'testnet': False},
