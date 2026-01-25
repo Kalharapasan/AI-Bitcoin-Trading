@@ -375,4 +375,34 @@ class ModelConfig(BaseModel):
         use_enum_values = True
         validate_assignment = True
         extra = 'forbid'
+
+class TradingConfig(BaseModel):
+    mode: TradingMode = Field(
+        default=TradingMode.PAPER,
+        description="Trading mode"
+    )
+    
+    symbol: str = Field(
+        default="BTC/USDT",
+        description="Trading symbol"
+    )
+    
+    timeframe: TimeFrame = Field(
+        default=TimeFrame.HOUR_1,
+        description="Trading timeframe"
+    )
+    
+    lookback_periods: int = Field(
+        default=1000,
+        ge=100,
+        le=10000,
+        description="Lookback periods for analysis"
+    )
+    
+    initial_capital: float = Field(
+        default=10000.0,
+        ge=100.0,
+        le=10000000.0,
+        description="Initial capital"
+    )
     
