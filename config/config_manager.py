@@ -1288,3 +1288,16 @@ class ConfigManager:
     def validate_current_config(self) -> Tuple[bool, List[str]]:
         errors = self.config.validate()
         return len(errors) == 0, errors
+
+    def get_config_summary(self) -> Dict[str, Any]:
+        return {
+            'config_path': self.config_path,
+            'environment': self.config.environment,
+            'version': self.config.version,
+            'trading_mode': self.config.trading.mode.value,
+            'symbol': self.config.trading.symbol,
+            'timeframe': self.config.trading.timeframe.value,
+            'enabled_models': [m.value for m in self.config.models.enabled_models],
+            'last_modified': self.config.last_modified.isoformat(),
+            'config_hash': self.config.config_hash
+        }
