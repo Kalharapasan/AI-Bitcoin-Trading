@@ -1017,3 +1017,6 @@ class AppConfig:
         for exchange in self.data.backup_exchanges:
             if exchange not in self.api.exchanges:
                 errors.append(f"Backup exchange {exchange} not configured in API")
+        
+        if len(self.models.enabled_models) == 0:
+            errors.append("At least one model must be enabled")
