@@ -825,3 +825,21 @@ class BacktestConfig(BaseModel):
         le=0.01,
         description="Slippage percentage"
     )
+    walk_forward: bool = Field(
+        default=True,
+        description="Enable walk-forward testing"
+    )
+    
+    training_window: int = Field(
+        default=180,
+        ge=30,
+        le=730,
+        description="Training window (days)"
+    )
+    
+    testing_window: int = Field(
+        default=30,
+        ge=7,
+        le=90,
+        description="Testing window (days)"
+    )
