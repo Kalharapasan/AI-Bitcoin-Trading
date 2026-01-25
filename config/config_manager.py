@@ -911,3 +911,14 @@ class AppConfig:
             config.save()
             logger.info(f"Created default configuration at {config_path}")
             return config
+
+        try:
+            with open(config_path, 'r') as f:
+                config_data = yaml.safe_load(f)
+            
+            if config_data is None:
+                config_data = {}
+            errors = ConfigValidator.validate_config(config_data)
+            if errors:
+                logger.error(f"Configuration validation errors: {errors}")
+                raise ValueError(f"Configuration validation failed: {errors}")
