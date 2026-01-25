@@ -1074,3 +1074,67 @@ class AppConfig:
             raise AttributeError(f"Configuration has no section: {section}")
         
 class ConfigValidator:
+    SCHEMA = {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+            "api": {
+                "type": "object",
+                "properties": {
+                    "exchanges": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object",
+                            "properties": {
+                                "api_key": {"type": "string"},
+                                "api_secret": {"type": "string"},
+                                "testnet": {"type": "boolean"}
+                            },
+                            "required": ["api_key", "api_secret"]
+                        }
+                    },
+                    "rate_limit_multiplier": {
+                        "type": "number",
+                        "minimum": 0.1,
+                        "maximum": 1.0
+                    }
+                },
+                "required": ["exchanges"]
+            },
+            "trading": {
+                "type": "object",
+                "properties": {
+                    "mode": {
+                        "type": "string",
+                        "enum": ["backtest", "paper", "live"]
+                    },
+                    "symbol": {"type": "string"},
+                    "timeframe": {
+                        "type": "string",
+                        "enum": ["1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w"]
+                    },
+                    "max_position_size": {
+                        "type": "number",
+                        "minimum": 0.01,
+                        "maximum": 1.0
+                    }
+                },
+                "required": ["mode", "symbol", "timeframe"]
+            },
+            "models": {
+                "type": "object",
+                "properties": {
+                    "enabled_models": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": ["lstm", "transformer", "cnn_lstm", "attention", 
+                                   "xgboost", "lightgbm", "catboost", "prophet", 
+                                   "ensemble", "deep_rl"]
+                        }
+                    }
+                }
+            }
+        },
+        "required": ["api", "trading", "models"]
+    }
