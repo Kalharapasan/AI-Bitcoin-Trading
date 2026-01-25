@@ -1323,3 +1323,13 @@ class ConfigManager:
         logger.info(f"Configuration imported from {import_path}")
     
 _config_manager: Optional[ConfigManager] = None
+
+def get_config_manager(config_path: Union[str, Path] = None) -> ConfigManager:
+
+
+    global _config_manager
+    
+    if _config_manager is None:
+        _config_manager = ConfigManager(config_path)
+    
+    return _config_manager
