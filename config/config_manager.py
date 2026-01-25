@@ -883,3 +883,25 @@ class AppConfig:
     data: DataConfig = field(default_factory=DataConfig)
     monitoring: MonitoringConfig = field(default_factory=MonitoringConfig)
     backtest: BacktestConfig = field(default_factory=BacktestConfig)
+    
+    version: str = "1.0.0"
+    environment: str = "development"
+    config_hash: str = ""
+    last_modified: datetime = field(default_factory=datetime.now)
+    config_path: str = ""
+    
+    @classmethod
+    def load(cls, config_path: Union[str, Path] = None) -> 'AppConfig':
+        """
+        Load configuration from YAML file
+        
+        Args:
+            config_path: Path to configuration file
+        
+        Returns:
+            AppConfig instance
+        """
+        if config_path is None:
+            config_path = CONFIG_DIR / "config.yaml"
+        
+        config_path = Path(config_path)
