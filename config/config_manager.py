@@ -1271,3 +1271,16 @@ class ConfigManager:
             except Exception as e:
                 logger.error(f"Error in config watcher thread: {str(e)}")
                 time.sleep(5) 
+    
+    def stop_watcher(self) -> None:
+        if self.observer is not None:
+            self.running = False
+            self.observer.stop()
+            self.observer.join()
+            self.observer = None
+            
+            if self.watch_thread:
+                self.watch_thread.join(timeout=2)
+                self.watch_thread = None
+            
+            logger.info("Configuration watcher stopped")
