@@ -1044,3 +1044,19 @@ class AppConfig:
                     current_dict.update(values)
                     setattr(self, section, type(section_obj)(**current_dict))
         self.config_hash = self.calculate_hash()
+    
+    def clone(self) -> 'AppConfig':
+        return AppConfig(
+            api=APIConfig(**self.api.dict()),
+            trading=TradingConfig(**self.trading.dict()),
+            models=ModelConfig(**self.models.dict()),
+            risk=RiskConfig(**self.risk.dict()),
+            data=DataConfig(**self.data.dict()),
+            monitoring=MonitoringConfig(**self.monitoring.dict()),
+            backtest=BacktestConfig(**self.backtest.dict()),
+            version=self.version,
+            environment=self.environment,
+            config_hash=self.config_hash,
+            last_modified=self.last_modified,
+            config_path=self.config_path
+        )
