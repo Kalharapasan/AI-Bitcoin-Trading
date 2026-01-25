@@ -935,4 +935,13 @@ class AppConfig:
                 environment=config_data.get('environment', 'development'),
                 config_path=str(config_path)
             )
+            config.config_hash = config.calculate_hash()
+            config.last_modified = datetime.fromtimestamp(config_path.stat().st_mtime)
+            
+            logger.info(f"Configuration loaded from {config_path}")
+            return config
+            
+        except Exception as e:
+            logger.error(f"Failed to load configuration from {config_path}: {str(e)}")
+            raise
         
