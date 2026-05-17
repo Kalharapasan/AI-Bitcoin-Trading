@@ -79,4 +79,9 @@ def load_latest_model():
     _current_model_id = Path(model_path).stem.replace("model_", "").replace("model", "default")
     print(f"[INFO] Model '{_current_model_id}' loaded successfully")
     return _current_model, _current_scaler
-    
+
+try:
+    load_latest_model()
+except FileNotFoundError as e:
+    print(f"[WARN] {e}")
+    print("[WARN] Waiting for Colab to send model via /upload-model")
