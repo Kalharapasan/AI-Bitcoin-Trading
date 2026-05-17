@@ -17,6 +17,31 @@ function App() {
     const [chartData, setChartData] = useState(null);
     const [chartLoading, setChartLoading] = useState(true);
 
+    const fetchPrediction = async () => {
+        setPrediction((prev) => ({ ...prev, loading: true, error: null }));
+        try {
+            const resp = await axios.post(`${API_BASE}/predict`, {
+                days: 7,
+            });
+            const { current_price, predicted_price, signal } = resp.data;
+            setPrediction({
+                current: current_price,
+                predicted: predicted_price,
+                signal: signal,
+                loading: false,
+                error: null,
+            });
+        } catch (err) {
+            console.error(err);
+            setPrediction((prev) => ({
+                ...prev,
+                loading: false,
+                error: err.response?.data?.detail || err.message,
+            }));
+        }
+    };
+
+
     return (
         <div className="app">
             <header className="app-header">
