@@ -20,3 +20,5 @@ _current_model = None
 _current_scaler = None
 _current_model_id = None
 _model_load_time = None
+
+def list_available_models() -> List[Dict]:
