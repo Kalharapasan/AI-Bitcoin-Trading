@@ -4,9 +4,10 @@ import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import './App.css';
 
-
+const API_BASE = 'http://localhost:8000';
 function App() {
 
+  
     return (
         <div className="app">
       <header className="app-header">
