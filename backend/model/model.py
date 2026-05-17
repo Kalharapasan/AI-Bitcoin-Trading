@@ -56,3 +56,5 @@ def load_model_from_path(model_path: str, scaler_path: str):
         scaler = pickle.load(f)
 
     return model, scaler
+
+def load_latest_model():
