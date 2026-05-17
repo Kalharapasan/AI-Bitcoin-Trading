@@ -70,4 +70,7 @@ def load_latest_model():
     else:
         model_path = DEFAULT_MODEL_PATH
         scaler_path = DEFAULT_SCALER_PATH
+        
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(f"Model not found: {model_path}")
     
