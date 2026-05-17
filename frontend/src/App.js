@@ -3,3 +3,10 @@ import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import './App.css';
+
+
+function App() {
+
+}
+
+export default App;
