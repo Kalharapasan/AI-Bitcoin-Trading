@@ -10,3 +10,4 @@ class Settings(BaseSettings):
     MODEL_DIR: Path = Path(__file__).resolve().parents[2] / "model"
     MODEL_FILE: str = "model.h5"
     SCALER_FILE: str = "scaler.pkl"
+    SEQUENCE_WINDOW: int = 60
