@@ -46,3 +46,13 @@ def get_latest_model_path() -> Optional[str]:
     if not models:
         return None
     return models[0]["path"]
+
+def load_model_from_path(model_path: str, scaler_path: str):
+    print(f"[INFO] Loading model: {model_path}")
+    model = load_model(model_path)
+
+    print(f"[INFO] Loading scaler: {scaler_path}")
+    with open(scaler_path, "rb") as f:
+        scaler = pickle.load(f)
+
+    return model, scaler
