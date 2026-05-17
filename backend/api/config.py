@@ -12,3 +12,4 @@ class Settings(BaseSettings):
     SCALER_FILE: str = "scaler.pkl"
     SEQUENCE_WINDOW: int = 60
     DEFAULT_PREDICT_DAYS: int = 7
+    BITCOIN_TICKER: str = "BTC-USD"
