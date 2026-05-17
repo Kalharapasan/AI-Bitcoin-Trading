@@ -16,3 +16,7 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 DEFAULT_MODEL_PATH = os.path.join(MODEL_DIR, "model.h5")
 DEFAULT_SCALER_PATH = os.path.join(MODEL_DIR, "scaler.pkl")
 
+_current_model = None
+_current_scaler = None
+_current_model_id = None
+_model_load_time = None
