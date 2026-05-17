@@ -22,3 +22,7 @@ _current_model_id = None
 _model_load_time = None
 
 def list_available_models() -> List[Dict]:
+    models = []
+    model_dir = Path(MODEL_DIR)
+    if not model_dir.exists():
+        return models
