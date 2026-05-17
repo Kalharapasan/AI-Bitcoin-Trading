@@ -1,0 +1,196 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0f1419;
+  color: #e0e0e0;
+}
+
+/* App Container */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.app-header {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  padding: 2rem;
+  text-align: center;
+  border-bottom: 2px solid #F7931A;
+}
+
+.app-header h1 {
+  color: #F7931A;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.disclaimer {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.disclaimer strong {
+  color: #ff6b6b;
+}
+
+/* Main Content */
+.app-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cards */
+.card {
+  background: #1e2329;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid #2c3136;
+}
+
+.card h2 {
+  color: #F7931A;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #2c3136;
+}
+
+/* Prediction Card */
+.prediction-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #2c3136;
+}
+
+.price-info:last-of-type {
+  border-bottom: none;
+}
+
+.price-info .label {
+  color: #888;
+  font-size: 0.95rem;
+}
+
+.price-info .value {
+  color: #e0e0e0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Signal Badges */
+.signal {
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.signal-buy {
+  background-color: #26a69a;
+  color: #fff;
+}
+
+.signal-sell {
+  background-color: #ef5350;
+  color: #fff;
+}
+
+.signal-hold {
+  background-color: #78909c;
+  color: #fff;
+}
+
+/* Buttons */
+.refresh-btn {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #F7931A;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.refresh-btn:hover {
+  background-color: #e68309;
+}
+
+.refresh-btn:disabled {
+  background-color: #555;
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* Chart */
+.chart-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container {
+  flex: 1;
+  min-height: 300px;
+  position: relative;
+}
+
+/* Status Text */
+.status-text {
+  color: #888;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+/* Error Text */
+.error-text {
+  color: #ef5350;
+  text-align: center;
+  padding: 1rem;
+  background: rgba(239, 83, 80, 0.1);
+  border-radius: 8px;
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: #555;
+  font-size: 0.85rem;
+  border-top: 1px solid #2c3136;
+}
