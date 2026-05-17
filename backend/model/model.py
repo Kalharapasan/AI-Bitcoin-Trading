@@ -37,3 +37,6 @@ def list_available_models() -> List[Dict]:
             "size_mb": round(stat.st_size / (1024 * 1024), 2),
             "created": datetime.fromtimestamp(stat.st_ctime).isoformat(),
         })
+    
+    models.sort(key=lambda x: x["created"], reverse=True)
+    return models
