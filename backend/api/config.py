@@ -13,3 +13,9 @@ class Settings(BaseSettings):
     SEQUENCE_WINDOW: int = 60
     DEFAULT_PREDICT_DAYS: int = 7
     BITCOIN_TICKER: str = "BTC-USD"
+    
+    CORS_ORIGINS: list[str] = [
+        "http://localhost:3000",   # React dev server
+        "http://127.0.0.1:3000",
+        # "https://your‑production‑frontend.com",  # <-- add when deployed
+    ]
