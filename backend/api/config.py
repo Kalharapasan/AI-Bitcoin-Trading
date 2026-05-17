@@ -11,3 +11,4 @@ class Settings(BaseSettings):
     MODEL_FILE: str = "model.h5"
     SCALER_FILE: str = "scaler.pkl"
     SEQUENCE_WINDOW: int = 60
+    DEFAULT_PREDICT_DAYS: int = 7
