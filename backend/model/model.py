@@ -40,3 +40,9 @@ def list_available_models() -> List[Dict]:
     
     models.sort(key=lambda x: x["created"], reverse=True)
     return models
+
+def get_latest_model_path() -> Optional[str]:
+    models = list_available_models()
+    if not models:
+        return None
+    return models[0]["path"]
