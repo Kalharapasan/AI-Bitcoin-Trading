@@ -59,3 +59,5 @@ def load_model_from_path(model_path: str, scaler_path: str):
 
 def load_latest_model():
     global _current_model, _current_scaler, _model_load_time, _current_model_id
+    latest = get_latest_model_path()
+    
