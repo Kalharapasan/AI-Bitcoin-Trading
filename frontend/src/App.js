@@ -41,6 +41,34 @@ function App() {
         }
     };
 
+    const fetchChartData = async () => {
+        setChartLoading(true);
+        try {
+            const resp = await axios.get(`${API_BASE}/api/chart-data`, {
+                params: { days: 30 },
+            });
+            const records = resp.data.data;
+
+            setChartData({
+                labels: records.map((r) => r.date),
+                datasets: [
+                    {
+                        label: 'BTC-USD Price',
+                        data: records.map((r) => r.price),
+                        borderColor: '#F7931A',
+                        backgroundColor: 'rgba(247, 147, 26, 0.1)',
+                        fill: true,
+                        tension: 0.1,
+                    },
+                ],
+            });
+        } catch (err) {
+            console.error('Chart data fetch failed:', err);
+        } finally {
+            setChartLoading(false);
+        }
+    };
+
 
     return (
         <div className="app">
