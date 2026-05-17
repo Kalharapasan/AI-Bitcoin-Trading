@@ -67,3 +67,6 @@ def load_latest_model():
         if not os.path.exists(scaler_path):
             scaler_path = os.path.join(MODEL_DIR, "scaler.pkl")
     
+    else:
+        
+    
