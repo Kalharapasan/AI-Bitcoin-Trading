@@ -77,6 +77,11 @@ function App() {
         return () => clearInterval(interval);
     }, []);
 
+    const getSignalClass = (signal) => {
+        if (!signal) return '';
+        return `signal signal-${signal.toLowerCase()}`;
+    };
+
 
     return (
         <div className="app">
