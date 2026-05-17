@@ -69,6 +69,14 @@ function App() {
         }
     };
 
+    useEffect(() => {
+        fetchChartData();
+        fetchPrediction();
+
+        const interval = setInterval(fetchPrediction, 60 * 1000); // every minute
+        return () => clearInterval(interval);
+    }, []);
+
 
     return (
         <div className="app">
