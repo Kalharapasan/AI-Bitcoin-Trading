@@ -14,6 +14,9 @@ function App() {
         error: null,
     });
 
+    const [chartData, setChartData] = useState(null);
+    const [chartLoading, setChartLoading] = useState(true);
+
     return (
         <div className="app">
             <header className="app-header">
