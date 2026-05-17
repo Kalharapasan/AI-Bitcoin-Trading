@@ -68,5 +68,6 @@ def load_latest_model():
             scaler_path = os.path.join(MODEL_DIR, "scaler.pkl")
     
     else:
-        
+        model_path = DEFAULT_MODEL_PATH
+        scaler_path = DEFAULT_SCALER_PATH
     
