@@ -74,3 +74,7 @@ def load_latest_model():
     if not os.path.exists(model_path):
         raise FileNotFoundError(f"Model not found: {model_path}")
     
+    _current_model, _current_scaler = load_model_from_path(model_path, scaler_path)
+    _model_load_time = datetime.now()
+    _current_model_id = Path(model_path).stem.replace("model_", "").replace("model", "default")
+    
