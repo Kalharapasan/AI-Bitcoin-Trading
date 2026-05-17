@@ -26,3 +26,14 @@ def list_available_models() -> List[Dict]:
     model_dir = Path(MODEL_DIR)
     if not model_dir.exists():
         return models
+    
+    for model_file in model_dir.glob("model*.h5"):
+        stat = model_file.stat()
+        model_id = model_file.stem.replace("model_", "").replace("model", "default")
+        models.append({
+            "model_id": model_id,
+            "filename": model_file.name,
+            "path": str(model_file),
+            "size_mb": round(stat.st_size / (1024 * 1024), 2),
+            "created": datetime.fromtimestamp(stat.st_ctime).isoformat(),
+        })
