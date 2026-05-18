@@ -104,3 +104,6 @@ async def reload_model():
         return _reload_model()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/models")
+async def list_models():
