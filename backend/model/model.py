@@ -151,3 +151,9 @@ def predict_price(days: int = 7) -> dict:
     )
     predicted_price = float(inv[0, 0])
     current_price = float(raw[-1, 0])
+    if predicted_price > current_price * 1.01:
+        signal = "BUY"
+    elif predicted_price < current_price * 0.99:
+        signal = "SELL"
+    else:
+        signal = "HOLD"
