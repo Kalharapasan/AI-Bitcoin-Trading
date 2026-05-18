@@ -122,3 +122,8 @@ def save_uploaded_model(model_bytes: bytes, scaler_bytes: bytes, model_id: str, 
     }
     
 def fetch_recent_data(days: int = 7) -> np.ndarray:
+    ticker = "BTC-USD"
+    df = yf.download(ticker, period=f"{days}d", interval="1d", progress=False)
+    if df.empty:
+        raise RuntimeError("Failed to fetch Bitcoin data from yfinance.")
+    return df[["Close", "Volume"]].values.astype(np.float32)
