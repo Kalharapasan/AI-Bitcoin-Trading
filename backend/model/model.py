@@ -112,3 +112,13 @@ def save_uploaded_model(model_bytes: bytes, scaler_bytes: bytes, model_id: str, 
     )
     _current_model_id = safe_id
     _model_load_time = datetime.now()
+    
+    return {
+        "model_file": model_filename,
+        "scaler_file": scaler_filename,
+        "model_id": safe_id,
+        "loss": loss,
+        "loaded": True,
+    }
+    
+    
