@@ -138,3 +138,4 @@ def prepare_sequence(data: np.ndarray, window: int = 60) -> np.ndarray:
         seq = np.concatenate([pad, scaled], axis=0)
     else:
         seq = scaled[-window:]
+    return seq.reshape(1, window, 2)
