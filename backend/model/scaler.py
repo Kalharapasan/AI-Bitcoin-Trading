@@ -10,3 +10,5 @@ def scale_features(scaler, data, fit=True):
     return scaler.transform(data)
 
 def inverse_scale_price(scaler, scaled_price):
+    dummy = np.array([[scaled_price, 0.0]])  
+    return float(scaler.inverse_transform(dummy)[0, 0])
