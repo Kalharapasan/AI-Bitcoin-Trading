@@ -105,3 +105,9 @@ def save_uploaded_model(model_bytes: bytes, scaler_bytes: bytes, model_id: str, 
     with open(os.path.join(MODEL_DIR, "scaler.pkl"), "wb") as f:
         f.write(scaler_bytes)
     
+    global _current_model, _current_scaler, _model_load_time, _current_model_id
+    _current_model, _current_scaler = load_model_from_path(
+        os.path.join(MODEL_DIR, "model.h5"),
+        os.path.join(MODEL_DIR, "scaler.pkl")
+    )
+    
