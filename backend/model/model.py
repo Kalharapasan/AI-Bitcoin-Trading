@@ -121,4 +121,4 @@ def save_uploaded_model(model_bytes: bytes, scaler_bytes: bytes, model_id: str, 
         "loaded": True,
     }
     
-    
+def fetch_recent_data(days: int = 7) -> np.ndarray:
