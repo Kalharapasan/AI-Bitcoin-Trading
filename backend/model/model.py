@@ -90,4 +90,6 @@ except FileNotFoundError as e:
 def save_uploaded_model(model_bytes: bytes, scaler_bytes: bytes, model_id: str, loss: float):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     safe_id = model_id.replace(" ", "_").replace("/", "_")
+    model_filename = f"model_{safe_id}_{timestamp}.h5"
+    scaler_filename = f"model_{safe_id}_{timestamp}_scaler.pkl"
     
