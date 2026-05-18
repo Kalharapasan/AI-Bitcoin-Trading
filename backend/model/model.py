@@ -163,3 +163,6 @@ def predict_price(days: int = 7) -> dict:
         "predicted_price": predicted_price,
         "signal": signal,
     }
+    
+def reload_model():
+    
