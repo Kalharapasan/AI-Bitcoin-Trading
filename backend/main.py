@@ -35,3 +35,8 @@ app.add_middleware(
 
 class PredictRequest(BaseModel):
     days: int = settings.DEFAULT_PREDICT_DAYS
+
+class PredictResponse(BaseModel):
+    current_price: float
+    predicted_price: float
+    signal: str
