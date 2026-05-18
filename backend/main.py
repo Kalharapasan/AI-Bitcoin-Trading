@@ -82,4 +82,18 @@ async def chart_data(days: int = 30):
     
 @app.post("/upload-model")
 async def upload_model(model: UploadFile = File(...),scaler: UploadFile = File(...),model_id: str = "default",loss: float = 0.0,):
-    
+    try:
+        model_bytes = await model.read()
+        scaler_bytes = await scaler.read()
+
+        result = _save_uploaded_model(
+            model_bytes, scaler_bytes, model_id, loss
+        )
+
+        return {
+            "status": "success",
+            "message": f"Model '{model_id}' uploaded and loaded",
+            "details": result,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
