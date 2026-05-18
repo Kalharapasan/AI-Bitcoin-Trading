@@ -144,4 +144,4 @@ def predict_price(days: int = 7) -> dict:
     if _current_model is None or _current_scaler is None:
         raise RuntimeError("Model not loaded. Wait for Colab to send model via /upload-model")
     
-    
+    pred_scaled = _current_model.predict(seq, verbose=0)[0][0]
