@@ -132,3 +132,9 @@ def prepare_sequence(data: np.ndarray, window: int = 60) -> np.ndarray:
     if _current_scaler is None:
         raise RuntimeError("Scaler not loaded")
     scaled = _current_scaler.transform(data)
+    if len(scaled) < window:
+        pad_len = window - len(scaled)
+        pad = np.repeat(scaled[0:1], pad_len, axis=0)
+        seq = np.concatenate([pad, scaled], axis=0)
+    else:
+        seq = scaled[-window:]
