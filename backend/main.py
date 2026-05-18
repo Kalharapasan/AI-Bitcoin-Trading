@@ -62,3 +62,24 @@ async def predict(request: PredictRequest):
 
 @app.get("/api/chart-data")
 async def chart_data(days: int = 30):
+    try:
+        ticker = settings.BITCOIN_TICKER
+        df = yf.download(ticker, period=f"{days}d", interval="1d", progress=False)
+        if df.empty:
+            raise HTTPException(status_code=502, detail="No data returned from yfinance")
+
+        records = []
+        for idx, row in df.iterrows():
+            records.append({
+                "date": idx.strftime("%Y-%m-%d"),
+                "price": float(row["Close"]),
+                "volume": float(row["Volume"]),
+            })
+
+        return {"ticker": ticker, "data": records}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Chart data fetch failed: {str(e)}")
+    
+@app.post("/upload-model")
+async def upload_model(model: UploadFile = File(...),scaler: UploadFile = File(...),model_id: str = "default",loss: float = 0.0,):
+    
