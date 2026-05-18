@@ -97,3 +97,7 @@ async def upload_model(model: UploadFile = File(...),scaler: UploadFile = File(.
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
+
+@app.post("/reload-model")
+async def reload_model():
+    
