@@ -111,3 +111,4 @@ async def list_models():
 
 @app.get("/model-info")
 async def model_info():
+    return _get_model_info()
