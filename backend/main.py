@@ -59,3 +59,6 @@ async def predict(request: PredictRequest):
         raise HTTPException(status_code=500, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
+
+@app.get("/api/chart-data")
+async def chart_data(days: int = 30):
