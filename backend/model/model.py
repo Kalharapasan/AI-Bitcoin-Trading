@@ -165,4 +165,9 @@ def predict_price(days: int = 7) -> dict:
     }
     
 def reload_model():
-    
+    load_latest_model()
+    return {
+        "status": "Model reloaded",
+        "loaded_at": _model_load_time.isoformat(),
+        "model_id": _current_model_id,
+    }
