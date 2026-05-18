@@ -9,3 +9,4 @@ def scale_features(scaler, data, fit=True):
         return scaler.fit_transform(data)
     return scaler.transform(data)
 
+def inverse_scale_price(scaler, scaled_price):
