@@ -139,3 +139,9 @@ def prepare_sequence(data: np.ndarray, window: int = 60) -> np.ndarray:
     else:
         seq = scaled[-window:]
     return seq.reshape(1, window, 2)
+
+def predict_price(days: int = 7) -> dict:
+    if _current_model is None or _current_scaler is None:
+        raise RuntimeError("Model not loaded. Wait for Colab to send model via /upload-model")
+    
+    
