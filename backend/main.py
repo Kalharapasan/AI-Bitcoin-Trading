@@ -115,3 +115,4 @@ async def model_info():
 
 @app.get("/health")
 async def health():
+    return {"status": "healthy"}
