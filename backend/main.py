@@ -49,3 +49,6 @@ async def root():
         "status": "operational",
         "version": settings.VERSION,
     }
+    
+@app.post("/predict", response_model=PredictResponse)
+async def predict(request: PredictRequest):
