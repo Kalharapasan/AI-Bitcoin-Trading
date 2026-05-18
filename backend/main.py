@@ -107,3 +107,4 @@ async def reload_model():
 
 @app.get("/models")
 async def list_models():
+    return {"models": _list_models(), "count": len(_list_models())}
