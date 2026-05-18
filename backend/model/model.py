@@ -85,3 +85,9 @@ try:
 except FileNotFoundError as e:
     print(f"[WARN] {e}")
     print("[WARN] Waiting for Colab to send model via /upload-model")
+
+
+def save_uploaded_model(model_bytes: bytes, scaler_bytes: bytes, model_id: str, loss: float):
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    safe_id = model_id.replace(" ", "_").replace("/", "_")
+    
