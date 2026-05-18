@@ -32,3 +32,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+class PredictRequest(BaseModel):
+    days: int = settings.DEFAULT_PREDICT_DAYS
