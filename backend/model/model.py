@@ -149,3 +149,5 @@ def predict_price(days: int = 7) -> dict:
     inv = _current_scaler.inverse_transform(
         np.column_stack([np.full((1, 1), pred_scaled), dummy_vol])
     )
+    predicted_price = float(inv[0, 0])
+    current_price = float(raw[-1, 0])
