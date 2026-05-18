@@ -40,3 +40,12 @@ class PredictResponse(BaseModel):
     current_price: float
     predicted_price: float
     signal: str
+
+
+@app.get("/")
+async def root():
+    return {
+        "message": "Bitcoin Trading AI API is running",
+        "status": "operational",
+        "version": settings.VERSION,
+    }
