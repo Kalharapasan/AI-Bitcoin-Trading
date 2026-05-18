@@ -173,3 +173,10 @@ def reload_model():
     }
 
 def get_model_info():
+    return {
+        "model_loaded": _current_model is not None,
+        "scaler_loaded": _current_scaler is not None,
+        "model_id": _current_model_id,
+        "loaded_at": _model_load_time.isoformat() if _model_load_time else None,
+        "available_models": list_available_models(),
+    }
