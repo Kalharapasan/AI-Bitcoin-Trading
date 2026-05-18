@@ -145,3 +145,7 @@ def predict_price(days: int = 7) -> dict:
         raise RuntimeError("Model not loaded. Wait for Colab to send model via /upload-model")
     
     pred_scaled = _current_model.predict(seq, verbose=0)[0][0]
+    dummy_vol = np.zeros((1, 1))
+    inv = _current_scaler.inverse_transform(
+        np.column_stack([np.full((1, 1), pred_scaled), dummy_vol])
+    )
