@@ -157,3 +157,9 @@ def predict_price(days: int = 7) -> dict:
         signal = "SELL"
     else:
         signal = "HOLD"
+        
+    return {
+        "current_price": current_price,
+        "predicted_price": predicted_price,
+        "signal": signal,
+    }
