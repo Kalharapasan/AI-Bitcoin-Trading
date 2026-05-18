@@ -92,4 +92,6 @@ def save_uploaded_model(model_bytes: bytes, scaler_bytes: bytes, model_id: str, 
     safe_id = model_id.replace(" ", "_").replace("/", "_")
     model_filename = f"model_{safe_id}_{timestamp}.h5"
     scaler_filename = f"model_{safe_id}_{timestamp}_scaler.pkl"
+    model_path = os.path.join(MODEL_DIR, model_filename)
+    scaler_path = os.path.join(MODEL_DIR, scaler_filename)
     
