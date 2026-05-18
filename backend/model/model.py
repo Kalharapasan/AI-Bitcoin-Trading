@@ -129,3 +129,6 @@ def fetch_recent_data(days: int = 7) -> np.ndarray:
     return df[["Close", "Volume"]].values.astype(np.float32)
 
 def prepare_sequence(data: np.ndarray, window: int = 60) -> np.ndarray:
+    if _current_scaler is None:
+        raise RuntimeError("Scaler not loaded")
+    scaled = _current_scaler.transform(data)
