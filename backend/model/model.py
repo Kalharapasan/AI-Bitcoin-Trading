@@ -171,3 +171,5 @@ def reload_model():
         "loaded_at": _model_load_time.isoformat(),
         "model_id": _current_model_id,
     }
+
+def get_model_info():
