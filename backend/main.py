@@ -17,3 +17,10 @@ from backend.model.model import (
     list_available_models as _list_models,
     save_uploaded_model as _save_uploaded_model,
 )
+
+
+app = FastAPI(
+    title=settings.APP_NAME,
+    version=settings.VERSION,
+    debug=settings.DEBUG,
+)
