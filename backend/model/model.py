@@ -100,4 +100,8 @@ def save_uploaded_model(model_bytes: bytes, scaler_bytes: bytes, model_id: str, 
     with open(scaler_path, "wb") as f:
         f.write(scaler_bytes)
     print(f"[INFO] Scaler saved: {scaler_path}")
+    with open(os.path.join(MODEL_DIR, "model.h5"), "wb") as f:
+        f.write(model_bytes)
+    with open(os.path.join(MODEL_DIR, "scaler.pkl"), "wb") as f:
+        f.write(scaler_bytes)
     
