@@ -110,4 +110,5 @@ def save_uploaded_model(model_bytes: bytes, scaler_bytes: bytes, model_id: str, 
         os.path.join(MODEL_DIR, "model.h5"),
         os.path.join(MODEL_DIR, "scaler.pkl")
     )
-    
+    _current_model_id = safe_id
+    _model_load_time = datetime.now()
