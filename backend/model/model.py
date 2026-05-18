@@ -97,4 +97,7 @@ def save_uploaded_model(model_bytes: bytes, scaler_bytes: bytes, model_id: str, 
     with open(model_path, "wb") as f:
         f.write(model_bytes)
     print(f"[INFO] Model saved: {model_path}")
+    with open(scaler_path, "wb") as f:
+        f.write(scaler_bytes)
+    print(f"[INFO] Scaler saved: {scaler_path}")
     
