@@ -52,3 +52,10 @@ async def root():
     
 @app.post("/predict", response_model=PredictResponse)
 async def predict(request: PredictRequest):
+    try:
+        result = _predict_price(days=request.days)
+        return result
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
