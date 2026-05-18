@@ -127,3 +127,5 @@ def fetch_recent_data(days: int = 7) -> np.ndarray:
     if df.empty:
         raise RuntimeError("Failed to fetch Bitcoin data from yfinance.")
     return df[["Close", "Volume"]].values.astype(np.float32)
+
+def prepare_sequence(data: np.ndarray, window: int = 60) -> np.ndarray:
